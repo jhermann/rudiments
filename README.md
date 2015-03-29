@@ -51,7 +51,6 @@ See [CONTRIBUTING](https://github.com/jhermann/rudiments/blob/master/CONTRIBUTIN
 **Packages**
 
 * [Rituals](https://jhermann.github.io/rituals)
-* [Click](http://click.pocoo.org/)
 
 
 ## Acknowledgements
