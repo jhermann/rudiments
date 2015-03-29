@@ -2,7 +2,10 @@
 # pylint: disable=bad-whitespace
 # flake8: noqa
 """
-    Rudiments – Fundamental elements for any Python project, like configuration handling.
+    Rudiments – Fundamental elements for any Python project.
+
+    This package offers configuration handling and other basic helpers
+    for Python projects.
 
     Copyright ©  2015 Jürgen Hermann <jh@web.de>
 
