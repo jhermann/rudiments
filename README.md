@@ -21,6 +21,22 @@ Fundamental elements for any Python project, like configuration handling.
 …
 
 
+## Other Packages
+
+This is a list of packages that solve a certain problem domain
+and are (hopefully) best-of-breed.
+
+Project | Description
+----: | :----
+[Click](http://click.pocoo.org/) | Command line interface framework
+[colorama](https://pypi.python.org/pypi/colorama) | Cross-platform colored terminal text
+[configobj](http://configobj.readthedocs.org/en/latest/) | Config file reading, writing and validation
+[github3.py](http://github3py.readthedocs.org/) | GitHub API v3 client
+[pyparsing](https://pyparsing.wikispaces.com/) | A library of classes that client code uses to construct the grammar directly in Python code
+[Requests](http://docs.python-requests.org/en/latest/) | Anything HTTP
+[sh](http://amoffat.github.io/sh/) | Full-fledged subprocess interface, treat any program as if it were a function
+
+
 ## Contributing
 
 To create a working directory for this project, call these commands:
