@@ -35,6 +35,7 @@ Project | Description
 [pyparsing](https://pyparsing.wikispaces.com/) | A library of classes that allows to construct a grammar in pure Python code
 [Requests](http://docs.python-requests.org/en/latest/) | Anything HTTP
 [sh](http://amoffat.github.io/sh/) | Full-fledged subprocess interface, treat any program as if it were a function
+[Soupy](http://soupy.readthedocs.org/) | Soupy wraps a fluent query interface around BeautifulSoup.
 
 
 ## Contributing
