@@ -3,6 +3,7 @@
 Fundamental elements for any Python project, like configuration handling.
 
  [![Travis CI](https://api.travis-ci.org/jhermann/rudiments.svg)](https://travis-ci.org/jhermann/rudiments)
+ [![Coveralls](https://img.shields.io/coveralls/jhermann/rudiments.svg)](https://coveralls.io/r/jhermann/rudiments)
  [![GitHub Issues](https://img.shields.io/github/issues/jhermann/rudiments.svg)](https://github.com/jhermann/rudiments/issues)
  [![License](https://img.shields.io/pypi/l/rudiments.svg)](https://github.com/jhermann/rudiments/blob/master/LICENSE)
  [![Development Status](https://pypip.in/status/rudiments/badge.svg)](https://pypi.python.org/pypi/rudiments/)
