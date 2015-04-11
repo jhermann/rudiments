@@ -28,6 +28,7 @@ and are (hopefully) best-of-breed.
 
 Project | Description
 ----: | :----
+[boltons](https://boltons.readthedocs.org/en/latest/) | A set of pure-Python utilities augmenting the stdlib
 [Click](http://click.pocoo.org/) | Command line interface framework
 [colorama](https://pypi.python.org/pypi/colorama) | Cross-platform colored terminal text
 [configobj](http://configobj.readthedocs.org/en/latest/) | Config file reading, writing and validation
