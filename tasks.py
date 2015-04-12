@@ -59,8 +59,8 @@ def fresh_cookies(ctx, mold=''):
 namespace.add_task(fresh_cookies)
 
 
-@task()  # pylint: disable=invalid-name
-def ci(ctx):
+@task
+def ci(ctx):  # pylint: disable=invalid-name
     """Perform continuous integration tasks."""
     opts = ['']
 
