@@ -42,6 +42,7 @@ def url_as_file(url, ext=None):
         the extension can optionally include a separating dot,
         otherwise it will be added.
 
+        >>> import re, json
         >>> with url_as_file('https://api.github.com/meta', ext='json') as meta:
         ...     print(re.match(r'.+/(.+)-[^.]+?(\.[^.]+?)$', meta).groups())
         ...     print(json.load(open(meta))['hooks'])
