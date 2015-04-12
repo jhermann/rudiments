@@ -18,13 +18,12 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import os
-import re
 import tempfile
 from contextlib import contextmanager
 
 import requests
 
-from ._compat import urlparse
+from ._compat import urlparse, encode_filename  # pylint: disable=unused-import
 
 
 __all__ = ['url_as_file']
@@ -42,18 +41,18 @@ def url_as_file(url, ext=None):
         the extension can optionally include a separating dot,
         otherwise it will be added.
 
-        >>> import re, json
+        >>> import io, re, json
         >>> with url_as_file('https://api.github.com/meta', ext='json') as meta:
-        ...     print(re.match(r'.+/(.+)-[^.]+?(\.[^.]+?)$', meta).groups())
-        ...     print(json.load(open(meta))['hooks'])
-        (u'www-api.github.com', u'.json')
-        [u'192.30.252.0/22']
+        ...     encode_filename('*'.join(re.match(r'.+/(.+)-[^.]+?([.][^.]+?)$', meta).groups()))
+        ...     bool(re.match(r"[0-9]+([.][0-9]+){3}/[0-9]{2}", json.load(io.open(meta, encoding='ascii'))['hooks'][0]))
+        'www-api.github.com*.json'
+        True
     """
     if ext:
         ext = '.' + ext.strip('.')  # normalize extension
     url_hint = 'www-{}-'.format(urlparse(url).hostname or 'any')
 
-    content = requests.get(url).text
+    content = requests.get(url).content
     with tempfile.NamedTemporaryFile(suffix=ext, prefix=url_hint, delete=False) as handle:
         handle.write(content)
 
