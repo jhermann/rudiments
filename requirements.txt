@@ -1,3 +1,6 @@
 #
 # Install requirements
 #
+
+# you need it anyway...
+requests>=2.6
