@@ -7,3 +7,6 @@ pytest-spec==0.2.24
 pytest-cov==1.8.1
 sh==1.11
 coveralls==0.5
+
+# requirements for `rituals.reamed`
+click==3.3
