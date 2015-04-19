@@ -1,6 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-""" Test `rudiments.morph`.
+""" Test ``rudiments.morph``.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
 #
