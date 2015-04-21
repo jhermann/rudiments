@@ -66,3 +66,74 @@ class AliasedGroup(Group):
         """Map some aliases to their 'real' names."""
         cmd_name = self.MAP.get(cmd_name, cmd_name)
         return Group.get_command(self, ctx, cmd_name)
+
+
+class Configuration(object):
+    """ Configuration container that is initialized early in the main command.
+
+        The default instance is available via the Click context as ``ctx.obj.cfg``.
+        Configuration is lazily loaded, on first access.
+    """
+
+    @classmethod
+    def from_context(cls, ctx, config_paths=None):
+        """Create a configuration object, and initialize the Click context with it."""
+        if ctx.obj is None:
+            ctx.obj = Bunch()
+        ctx.obj.cfg = cls(ctx.info_name, config_paths)
+        return ctx.obj.cfg
+
+    def __init__(self, name, config_paths=None):
+        """ Set up static knowledge about configuration.
+
+            ``config_paths`` is a list of PATHs to config files or directories.
+            If that is non-empty, exactly those paths will be considered; an empty
+            path element represents the default locations (just like in MANPATH).
+
+            If the environment variable ``‹prefix›_CONFIG`` is set, its value will
+            be appended to the default locations.
+        """
+        self.name = name
+        self.config_paths = []
+
+        env_config = os.environ.get((self.name + '-config').upper().replace('-', '_'), '')
+        defaults = [
+            '/etc/{}.conf'.format(self.name),
+            os.path.join(get_app_dir(self.name) + '.conf'),
+        ] + [i for i in env_config.split(os.pathsep) if i]
+
+        for path in config_paths or []:
+            for name in path.split(os.pathsep):
+                if name:
+                    self.config_paths.append(name)
+                else:
+                    self.config_paths.extend(defaults)
+
+        if not self.config_paths:
+            self.config_paths = defaults
+
+    def locations(self, exists=True):
+        """ Return the location of the config file(s).
+
+            A given directory will be scanned for ``*.conf`` files, in alphabetical order.
+            Any duplicates will be eliminated.
+
+            If ``exists`` is True, only existing configuration locations are returned.
+        """
+        result = []
+        for config_files in self.config_paths:
+            if not config_files:
+                continue
+            if os.path.isdir(config_files):
+                config_files = [os.path.join(config_files, i)
+                                for i in os.listdir(config_files)
+                                if i.endswith('.conf')]
+            else:
+                config_files = [config_files]
+            for config_file in config_files:
+                if not exists or os.path.exists(config_file):
+                    config_file = os.path.abspath(config_file)
+                    if config_file in result:
+                        result.remove(config_file)
+                    result.append(config_file)
+        return result
