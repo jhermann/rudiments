@@ -20,12 +20,15 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 import re
 
+import configobj
+from bunch import bunchify
 from click import *  # pylint: disable=wildcard-import
 from click import __all__
 
+
 __all__ = tuple(__all__) + (
     'pretty_path', 'serror',
-    'LoggedFailure', 'AliasedGroup',
+    'LoggedFailure', 'AliasedGroup', 'Configuration',
 )
 
 
@@ -93,8 +96,10 @@ class Configuration(object):
             If the environment variable ``‹prefix›_CONFIG`` is set, its value will
             be appended to the default locations.
         """
+        self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
         self.name = name
         self.config_paths = []
+        self.loaded = False
 
         env_config = os.environ.get((self.name + '-config').upper().replace('-', '_'), '')
         defaults = [
@@ -137,3 +142,17 @@ class Configuration(object):
                         result.remove(config_file)
                     result.append(config_file)
         return result
+
+    def load(self):
+        """Load configuration from the defined locations."""
+        if not self.loaded:
+            self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
+            for path in self.locations():
+                part = configobj.ConfigObj(infile=path, encoding='utf-8', default_encoding='utf-8')
+                self.values.merge(part)
+            self.loaded = True
+        return self.values
+
+    def section(self, ctx):
+        """Return section of the config for a specific context (sub-command)."""
+        return self.load()[ctx.info_name]
