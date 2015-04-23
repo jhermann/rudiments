@@ -78,6 +78,8 @@ class Configuration(object):
         Configuration is lazily loaded, on first access.
     """
 
+    NO_DEFAULT = object()
+
     @classmethod
     def from_context(cls, ctx, config_paths=None):
         """Create a configuration object, and initialize the Click context with it."""
@@ -156,3 +158,13 @@ class Configuration(object):
     def section(self, ctx):
         """Return section of the config for a specific context (sub-command)."""
         return self.load()[ctx.info_name]
+
+    def get(self, name, default=NO_DEFAULT):
+        """Return the specified key from the root section."""
+        values = self.load()
+        try:
+            return values[name]
+        except KeyError:
+            if default is self.NO_DEFAULT:
+                raise
+            return default
