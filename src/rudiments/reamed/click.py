@@ -21,7 +21,7 @@ import os
 import re
 
 import configobj
-from bunch import bunchify
+from bunch import bunchify, Bunch
 from click import *  # pylint: disable=wildcard-import
 from click import __all__
 
