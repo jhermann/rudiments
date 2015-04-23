@@ -161,7 +161,7 @@ class Configuration(object):
         try:
             return values[ctx.info_name]
         except KeyError:
-            raise LoggedError("Configuration section '{}' not found!".format(ctx.info_name))
+            raise LoggedFailure("Configuration section '{}' not found!".format(ctx.info_name))
 
     def get(self, name, default=NO_DEFAULT):
         """Return the specified key from the root section."""
@@ -170,5 +170,5 @@ class Configuration(object):
             return values[name]
         except KeyError:
             if default is self.NO_DEFAULT:
-                raise LoggedError("Configuration value '{}' not found in root section!".format(name))
+                raise LoggedFailure("Configuration value '{}' not found in root section!".format(name))
             return default
