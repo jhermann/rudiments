@@ -157,7 +157,11 @@ class Configuration(object):
 
     def section(self, ctx):
         """Return section of the config for a specific context (sub-command)."""
-        return self.load()[ctx.info_name]
+        values = self.load()
+        try:
+            return values[ctx.info_name]
+        except KeyError:
+            raise LoggedError("Configuration section '{}' not found!".format(ctx.info_name))
 
     def get(self, name, default=NO_DEFAULT):
         """Return the specified key from the root section."""
@@ -166,5 +170,5 @@ class Configuration(object):
             return values[name]
         except KeyError:
             if default is self.NO_DEFAULT:
-                raise
+                raise LoggedError("Configuration value '{}' not found in root section!".format(name))
             return default
