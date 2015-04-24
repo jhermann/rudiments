@@ -19,6 +19,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import re
+import sys
 
 import configobj
 from bunch import bunchify, Bunch
@@ -154,6 +155,10 @@ class Configuration(object):
                 self.values.merge(part)
             self.loaded = True
         return self.values
+
+    def dump(self, to=None):
+        """Dump the merged configuration to a stream or stdout."""
+        self.load().write(to or sys.stdout)
 
     def section(self, ctx):
         """Return section of the config for a specific context (sub-command)."""
