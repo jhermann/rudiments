@@ -20,7 +20,6 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import unittest
-import StringIO
 from contextlib import contextmanager
 
 import pytest
@@ -140,17 +139,19 @@ class ConfigurationTests(unittest.TestCase):
         assert isinstance(values, configobj.ConfigObj)
 
     def test_configuration_dump_writes_to_stream(self):
-        out = StringIO.StringIO()
+        memo = []
+        out = Bunch(write=lambda d: memo.append(d))
         cfg = Configuration('foobarbaz_wont_exist_ever')
         cfg.dump(out)
-        assert out.getvalue() == '\n'
+        assert ''.join(i.decode('ascii') for i in memo) == '\n'
 
     def test_configuration_dump_with_value(self):
-        out = StringIO.StringIO()
+        memo = []
+        out = Bunch(write=lambda d: memo.append(d))
         cfg = Configuration('foobarbaz_wont_exist_ever')
         cfg.load().merge(dict(foo='bar'))
         cfg.dump(out)
-        assert out.getvalue() == 'foo = bar\n'
+        assert ''.join(i.decode('ascii') for i in memo) == 'foo = bar\n'
 
     def test_configuration_section_access_works(self):
         ctx = Bunch(info_name='section')
