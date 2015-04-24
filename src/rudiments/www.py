@@ -43,10 +43,8 @@ def url_as_file(url, ext=None):
 
         >>> import io, re, json
         >>> with url_as_file('https://api.github.com/meta', ext='json') as meta:
-        ...     encode_filename('*'.join(re.match(r'.+/(.+)-[^.]+?([.][^.]+?)$', meta).groups()))
-        ...     bool(re.match(r"[0-9]+([.][0-9]+){3}/[0-9]{2}", json.load(io.open(meta, encoding='ascii'))['hooks'][0]))
-        'www-api.github.com*.json'
-        True
+        ...     meta, json.load(io.open(meta, encoding='ascii'))
+        (u'/tmp/www-api.github.com-Ba5OhD.json', [u'192.30.252.0/22'])
     """
     if ext:
         ext = '.' + ext.strip('.')  # normalize extension
