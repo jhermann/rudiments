@@ -9,5 +9,6 @@ sh==1.11
 coveralls==0.5
 
 # requirements for `rituals.reamed`
+bunch==1.0.1
 click==3.3
 configobj>=5
