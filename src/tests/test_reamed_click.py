@@ -20,9 +20,12 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import unittest
+import StringIO
 from contextlib import contextmanager
 
-# import pytest
+import pytest
+import configobj
+from bunch import Bunch
 
 from rudiments.reamed import click
 from rudiments.reamed.click import *  # pylint: disable=unused-wildcard-import
@@ -71,3 +74,107 @@ class LoggedFailureTests(unittest.TestCase):
     def test_logged_failure_is_styled(self):
         exc = LoggedFailure("foo")
         assert exc.message[0] == '\x1b', "Message starts with ANSI sequence"
+
+
+class ConfigurationTests(unittest.TestCase):
+
+    def test_configuration_from_context_creation_work(self):
+        ctx = Bunch(info_name='foobarbaz', obj=None)
+        cfg = Configuration.from_context(ctx)
+        assert isinstance(cfg, Configuration), "Configuration has expected type"
+        assert ctx.obj.cfg is cfg, "Configuration is added to context"
+        assert cfg.name == 'foobarbaz'
+        assert len(cfg.config_paths) >= 2, "Default config paths are used"
+        assert cfg.config_paths[0] == '/etc/foobarbaz.conf', "Default config paths are used"
+
+    def test_configuration_from_context_with_existing_context_object(self):
+        ctx_obj = Bunch()
+        ctx = Bunch(info_name='foobarbaz', obj=ctx_obj)
+        cfg = Configuration.from_context(ctx)
+        assert ctx_obj.cfg is cfg
+
+    def test_configuration_paths_taken_from_environment(self):
+        env_paths = ['foo.conf', 'bar.conf']
+        os.environ['FOOBARBAZ_CONFIG'] = os.pathsep.join(env_paths)
+        cfg = Configuration('foobarbaz')
+        del os.environ['FOOBARBAZ_CONFIG']
+        assert cfg.config_paths[-2:] == env_paths
+
+    def test_explicit_configuration_paths_override_defaults(self):
+        cfg = Configuration('foo', ['foobarbaz.conf'])
+        assert cfg.config_paths == ['foobarbaz.conf']
+
+    def test_empty_path_element_inserts_defaults(self):
+        cfg = Configuration('foo', ['', 'foobarbaz.conf'])
+        assert cfg.config_paths[0] == '/etc/foo.conf', "Default config paths are used"
+        assert cfg.config_paths[-1] == 'foobarbaz.conf'
+
+    def test_multiple_empty_path_elements_are_expanded(self):
+        cfg = Configuration('foo', ['', 'foobarbaz.conf', ''])
+        assert cfg.config_paths[0] == '/etc/foo.conf', "Default config paths are used"
+        assert cfg.config_paths[len(cfg.config_paths) // 2] == 'foobarbaz.conf'
+
+    def test_configuration_locations_filters_by_existence(self):
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        assert len(cfg.config_paths) > 0
+        assert len(cfg.locations()) == 0
+        assert len(cfg.locations(exists=False)) == len(cfg.config_paths)
+
+    def test_configuration_default_uses_app_dir(self):
+        name = 'foobarbaz_wont_exist_ever'
+        cfg = Configuration(name)
+        assert cfg.locations(exists=False)[1] == click.get_app_dir(name) + '.conf'
+
+    def test_configuration_locations_eliminates_dupes(self):
+        cfg = Configuration('foobarbaz_wont_exist_ever', ['', ''])
+        assert len(cfg.locations(exists=False)) == len(cfg.config_paths) // 2
+
+    # TODO: def test_configuration_locations_expands_directories(self):
+
+    def test_configuration_load_with_no_files_works(self):
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        assert not cfg.loaded
+        values = cfg.load()
+        assert cfg.loaded
+        assert values is cfg.values
+        assert isinstance(values, configobj.ConfigObj)
+
+    def test_configuration_dump_writes_to_stream(self):
+        out = StringIO.StringIO()
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        cfg.dump(out)
+        assert out.getvalue() == '\n'
+
+    def test_configuration_dump_with_value(self):
+        out = StringIO.StringIO()
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        cfg.load().merge(dict(foo='bar'))
+        cfg.dump(out)
+        assert out.getvalue() == 'foo = bar\n'
+
+    def test_configuration_section_access_works(self):
+        ctx = Bunch(info_name='section')
+        section = dict(foo='bar')
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        cfg.load().merge(dict(section=section))
+        assert cfg.section(ctx) == section
+
+    def test_configuration_section_raises_on_unknown_name(self):
+        ctx = Bunch(info_name='section')
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        with pytest.raises(click.LoggedFailure):
+            cfg.section(ctx)
+
+    def test_configuration_get_works(self):
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        cfg.load().merge(dict(foo='bar'))
+        assert cfg.get('foo') == 'bar'
+
+    def test_configuration_get_returns_default(self):
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        assert cfg.get('foo', None) is None
+
+    def test_configuration_get_raises_without_default(self):
+        cfg = Configuration('foobarbaz_wont_exist_ever')
+        with pytest.raises(click.LoggedFailure):
+            cfg.get('foo')
