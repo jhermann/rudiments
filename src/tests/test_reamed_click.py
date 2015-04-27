@@ -163,6 +163,11 @@ class ConfigurationTests(object):
         assert cfg.get('bar') == 'baz'
         assert cfg.get('foo', None) is None
 
+    def test_configuration_locations_with_empty_path(self):
+        cfg = Configuration('foo')
+        cfg.config_paths = ['']
+        assert cfg.locations() == []
+
     def test_configuration_load_with_no_files_works(self):
         cfg = Configuration('foobarbaz_wont_exist_ever')
         assert not cfg.loaded
