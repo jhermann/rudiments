@@ -22,7 +22,7 @@ import re
 import sys
 
 import configobj
-from bunch import bunchify, Bunch
+from bunch import Bunch
 from click import *  # pylint: disable=wildcard-import
 from click import __all__
 
@@ -156,7 +156,7 @@ class Configuration(object):
             self.loaded = True
         return self.values
 
-    def dump(self, to=None):
+    def dump(self, to=None):  # pylint: disable=invalid-name
         """Dump the merged configuration to a stream or stdout."""
         self.load().write(to or sys.stdout)
 

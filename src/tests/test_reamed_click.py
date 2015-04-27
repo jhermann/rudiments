@@ -1,6 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-# pylint: disable=invalid-name
+# pylint: disable=invalid-name, unnecessary-lambda
 """ Test ``rudiments.reamed.click``.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
