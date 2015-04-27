@@ -1,4 +1,4 @@
-# rudiments
+# Rudiments
 
 Fundamental elements for any Python project, like configuration handling.
 
@@ -14,12 +14,28 @@ Fundamental elements for any Python project, like configuration handling.
 
 ## Overview
 
-…
+This library collects ‘miscellaneous’ functionality that is unspecific in nature and shared among many projects.
+It also collects small extensions to other support packages that don't warrant their own project,
+in the ``rudiments.reamed`` package.
+
+See “Other Packages” below for problem domains that are already covered by good to excellent solutions.
 
 
 ## Usage
 
-…
+*Rudiments* can be installed from PyPI via ``pip install rudiments`` as usual,
+see [releases](https://github.com/jhermann/rudiments/releases) for an overview of available versions
+– the project uses [semantic versioning](http://semver.org/)
+and follows [PEP 440](https://www.python.org/dev/peps/pep-0440/) conventions.
+To get a bleeding-edge version from source, use these commands:
+
+```sh
+repo="jhermann/rudiments"
+pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
+pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
+```
+
+See [Contributing](#contributing) on how to create a full development environment.
 
 
 ## Other Packages
