@@ -2,6 +2,7 @@
 
 Fundamental elements for any Python project, like configuration handling.
 
+ [![Librelist](https://img.shields.io/badge/Librelist-python.rudiments-orange.svg)](http://librelist.com/browser/python.rudiments)
  [![Travis CI](https://api.travis-ci.org/jhermann/rudiments.svg)](https://travis-ci.org/jhermann/rudiments)
  [![Coveralls](https://img.shields.io/coveralls/jhermann/rudiments.svg)](https://coveralls.io/r/jhermann/rudiments)
  [![GitHub Issues](https://img.shields.io/github/issues/jhermann/rudiments.svg)](https://github.com/jhermann/rudiments/issues)
@@ -19,6 +20,9 @@ It also collects small extensions to other support packages that don't warrant t
 in the ``rudiments.reamed`` package.
 
 See “Other Packages” below for problem domains that are already covered by good to excellent solutions.
+
+:speech_balloon: | To get help or talk about this project, please use the python.rudiments@librelist.com mailing list.
+---- | :----
 
 
 ## Usage
