@@ -7,6 +7,8 @@ pytest-spec==0.2.24
 pytest-cov==1.8.1
 sh==1.11
 coveralls==0.5
+responses==0.3.0
+# https://github.com/jhermann/responses/archive/working-context-manager.zip#egg=responses
 
 # requirements for `rituals.reamed`
 bunch==1.0.1
