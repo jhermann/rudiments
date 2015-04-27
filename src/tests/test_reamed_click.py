@@ -75,7 +75,6 @@ class LoggedFailureTests(object):
 
 
 class GroupMock(Group, list):
-    """Mock replacement for click.Group."""
 
     def get_command(self, ctx, cmd_name):
         self.append((ctx, cmd_name))
@@ -86,18 +85,18 @@ class AliasedGroupMock(AliasedGroup, GroupMock):
 
     MAP = dict(foo='bar')
 
+aliased_group = pytest.fixture()(lambda: AliasedGroupMock())
+
 
 class AliasedGroupTests(object):
 
-    def test_alias_group_maps_to_canonical_name(self):
-        mock = AliasedGroupMock()
-        mock.get_command(None, 'foo')
-        assert mock == [(None, 'bar')]
+    def test_alias_group_maps_to_canonical_name(self, aliased_group):
+        aliased_group.get_command(None, 'foo')
+        assert aliased_group == [(None, 'bar')]
 
-    def test_alias_group_passes_on_unmapped_name(self):
-        mock = AliasedGroupMock()
-        mock.get_command(None, 'foobar')
-        assert mock == [(None, 'foobar')]
+    def test_alias_group_passes_on_unmapped_name(self, aliased_group):
+        aliased_group.get_command(None, 'foobar')
+        assert aliased_group == [(None, 'foobar')]
 
 
 class ConfigurationTests(object):
