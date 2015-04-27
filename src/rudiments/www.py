@@ -51,7 +51,7 @@ def url_as_file(url, ext=None):
     url_hint = 'www-{}-'.format(urlparse(url).hostname or 'any')
 
     content = requests.get(url).content
-    with tempfile.NamedTemporaryFile(suffix=ext, prefix=url_hint, delete=False) as handle:
+    with tempfile.NamedTemporaryFile(suffix=ext or '', prefix=url_hint, delete=False) as handle:
         handle.write(content)
 
     try:
