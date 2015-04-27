@@ -56,6 +56,13 @@ Project | Description
 [sh](http://amoffat.github.io/sh/) | Full-fledged subprocess interface, treat any program as if it were a function
 [Soupy](http://soupy.readthedocs.org/) | Soupy wraps a fluent query interface around BeautifulSoup.
 
+The following help you with writing your unit and integration tests.
+
+Project | Description
+----: | :----
+[pytest-localserver](https://pypi.python.org/pypi/pytest-localserver) | *py.test* plugin to test server connections locally
+[Responses](https://github.com/getsentry/responses) | A utility for mocking out the *Requests* library
+
 
 ## Contributing
 
