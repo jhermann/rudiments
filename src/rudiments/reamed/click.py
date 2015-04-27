@@ -69,7 +69,7 @@ class AliasedGroup(Group):
     def get_command(self, ctx, cmd_name):
         """Map some aliases to their 'real' names."""
         cmd_name = self.MAP.get(cmd_name, cmd_name)
-        return Group.get_command(self, ctx, cmd_name)
+        return super(AliasedGroup, self).get_command(ctx, cmd_name)
 
 
 class Configuration(object):
