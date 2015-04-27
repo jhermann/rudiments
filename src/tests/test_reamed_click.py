@@ -19,7 +19,6 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import os
-import unittest
 from contextlib import contextmanager
 
 import pytest
@@ -30,7 +29,7 @@ from rudiments.reamed import click
 from rudiments.reamed.click import *  # pylint: disable=unused-wildcard-import
 
 
-class PrettyPathTests(unittest.TestCase):
+class PrettyPathTests(object):
 
     def test_pretty_path_replaces_home_folder(self):
         path = os.path.expanduser('~/foobar')
@@ -40,7 +39,7 @@ class PrettyPathTests(unittest.TestCase):
         assert path.split(os.sep) == ['~', 'foobar'], "Path is semantically the same"
 
 
-class SerrorTests(unittest.TestCase):
+class SerrorTests(object):
     RECORDER = []
 
     @contextmanager
@@ -64,7 +63,7 @@ class SerrorTests(unittest.TestCase):
             assert self.RECORDER[-1] == '1 2'
 
 
-class LoggedFailureTests(unittest.TestCase):
+class LoggedFailureTests(object):
 
     def test_logged_failure_is_usage_error(self):
         exc = LoggedFailure("foo")
@@ -75,9 +74,9 @@ class LoggedFailureTests(unittest.TestCase):
         assert exc.message[0] == '\x1b', "Message starts with ANSI sequence"
 
 
-class ConfigurationTests(unittest.TestCase):
+class ConfigurationTests(object):
 
-    def test_configuration_from_context_creation_work(self):
+    def test_configuration_from_context_creation_works(self):
         ctx = Bunch(info_name='foobarbaz', obj=None)
         cfg = Configuration.from_context(ctx)
         assert isinstance(cfg, Configuration), "Configuration has expected type"
@@ -128,7 +127,15 @@ class ConfigurationTests(unittest.TestCase):
         cfg = Configuration('foobarbaz_wont_exist_ever', ['', ''])
         assert len(cfg.locations(exists=False)) == len(cfg.config_paths) // 2
 
-    # TODO: def test_configuration_locations_expands_directories(self):
+    def test_configuration_locations_expands_directories(self, tmpdir):
+        conf_d = tmpdir.mkdir('conf.d')
+        conf_d.join('test.conf').write_text('bar=baz', encoding='utf-8')
+        conf_d.join('ignored.txt').write_text('foo=1', encoding='utf-8')
+
+        cfg = Configuration('foo', [str(conf_d)])
+        assert cfg.locations() == [str(conf_d.join('test.conf'))]
+        assert cfg.get('bar') == 'baz'
+        assert cfg.get('foo', None) is None
 
     def test_configuration_load_with_no_files_works(self):
         cfg = Configuration('foobarbaz_wont_exist_ever')

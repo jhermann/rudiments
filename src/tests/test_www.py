@@ -18,7 +18,6 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import os
-import unittest
 from contextlib import contextmanager
 
 # import pytest
@@ -27,7 +26,7 @@ import responses
 from rudiments.www import *
 
 
-class URLAsFileTests(unittest.TestCase):
+class URLAsFileTests(object):
 
     URL = 'http://example.com/index.html'
     BODY = 'Hi there!'

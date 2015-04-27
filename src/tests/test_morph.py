@@ -17,14 +17,12 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-import unittest
-
 import pytest
 
 from rudiments.morph import *
 
 
-#class FoobarTests(unittest.TestCase):
+#class FoobarTests(object):
 
 #    def test_foobar(self):
 #        assert False
