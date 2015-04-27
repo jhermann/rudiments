@@ -1,6 +1,7 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
 # pylint: disable=invalid-name, unnecessary-lambda, too-few-public-methods
+# pylint: disable=too-many-ancestors, redefined-outer-name
 """ Test ``rudiments.reamed.click``.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
@@ -80,12 +81,12 @@ class GroupMock(Group, list):
         self.append((ctx, cmd_name))
 
 
-class AliasedGroupMock(AliasedGroup, GroupMock):
+class AliasedGroupWithMock(AliasedGroup, GroupMock):
     """Go watch Raymond's ‘Super considered super!’ @ https://youtu.be/EiOglTERPEo"""
 
     MAP = dict(foo='bar')
 
-aliased_group = pytest.fixture()(lambda: AliasedGroupMock())
+aliased_group = pytest.fixture()(lambda: AliasedGroupWithMock())
 
 
 class AliasedGroupTests(object):
