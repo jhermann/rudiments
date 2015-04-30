@@ -3,6 +3,7 @@
 Fundamental elements for any Python project, like configuration handling.
 
  [![Librelist](https://img.shields.io/badge/Librelist-python.rudiments-orange.svg)](http://librelist.com/browser/python.rudiments)
+ [![Documentation](https://readthedocs.org/projects/rudiments/badge/?version=latest)](https://readthedocs.org/projects/rudiments/?badge=latest)
  [![Travis CI](https://api.travis-ci.org/jhermann/rudiments.svg)](https://travis-ci.org/jhermann/rudiments)
  [![Coveralls](https://img.shields.io/coveralls/jhermann/rudiments.svg)](https://coveralls.io/r/jhermann/rudiments)
  [![GitHub Issues](https://img.shields.io/github/issues/jhermann/rudiments.svg)](https://github.com/jhermann/rudiments/issues)
