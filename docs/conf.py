@@ -98,6 +98,9 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
+# Napoleon settings
+napoleon_numpy_docstring = False
+
 
 # -- Options for HTML output ---------------------------------------------------
 if not on_rtd:
