@@ -44,7 +44,7 @@ def url_as_file(url, ext=None):
 
         Parameters:
             url (str): URL to retrieve.
-            ext (str): Optional extension for the generated filename.
+            ext (str, optional): Extension for the generated filename.
 
         Yields:
             str: The path to a temporary file with the content of the URL.
