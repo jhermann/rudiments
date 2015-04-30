@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-continuation
-""" ‘Double Click’ – Extensions to Click.
+""" ‘Double Click’ – Extensions to `Click <http://click.pocoo.org/4/>`_.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
 #
@@ -26,11 +26,14 @@ from bunch import Bunch
 from click import *  # pylint: disable=wildcard-import
 from click import __all__
 
+from .._compat import encode_filename
 
-__all__ = tuple(__all__) + (
+
+__all__ = list(__all__) + [
     'pretty_path', 'serror',
     'LoggedFailure', 'AliasedGroup', 'Configuration',
-)
+]
+__all__ = [encode_filename(_) for _ in __all__]
 
 
 def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):

@@ -27,6 +27,7 @@ from ._compat import urlparse, encode_filename  # pylint: disable=unused-import
 
 
 __all__ = ['url_as_file']
+__all__ = [encode_filename(_) for _ in __all__]
 
 
 @contextmanager
