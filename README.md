@@ -96,4 +96,4 @@ See [CONTRIBUTING](https://github.com/jhermann/rudiments/blob/master/CONTRIBUTIN
 
 ## Acknowledgements
 
-…
+* Documentation hosted by [Read the Docs](https://readthedocs.org/).
