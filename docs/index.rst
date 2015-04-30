@@ -59,6 +59,9 @@ To create a working directory for this project, call these commands:
     . .env --yes --develop
     invoke build --docs test check
 
+Contributing to this project is easy, and reporting an issue or
+adding to the documentation also improves things for every user.
+You don’t need to be a developer to contribute.
 See :doc:`CONTRIBUTING` for more.
 
 

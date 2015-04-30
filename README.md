@@ -73,6 +73,9 @@ cd "rudiments"
 invoke build --docs test check
 ```
 
+Contributing to this project is easy, and reporting an issue or
+adding to the documentation also improves things for every user.
+You don’t need to be a developer to contribute.
 See [CONTRIBUTING](https://github.com/jhermann/rudiments/blob/master/CONTRIBUTING.md) for more.
 
 
