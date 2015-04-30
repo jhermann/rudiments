@@ -71,6 +71,7 @@ Documentation Contents
     usage
     fullapi
     CONTRIBUTING
+    LICENSE
 
 
 References
