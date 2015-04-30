@@ -1,4 +1,4 @@
-..  _fullapi:
+..  full API docs
 
     Copyright ©  2015 Jürgen Hermann <jh@web.de>
 
@@ -14,6 +14,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 Complete API Reference
 ======================

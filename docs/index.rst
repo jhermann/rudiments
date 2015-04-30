@@ -15,20 +15,83 @@
     limitations under the License.
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 Welcome to the “Rudiments” manual!
 ==================================
 
-*Rudiments* offers fundamental elements for any Python project, like configuration handling.
+.. image:: img/logo.png
+
+*Rudiments* is a Python library that offers ‘miscellaneous’ functionality which
+is unspecific in nature and shared among many projects. It also collects small
+extensions to other support packages that don't warrant their own project,
+in the :mod:`rudiments.reamed` package.
 
 
-Contents
---------
+Installing
+----------
+
+*Rudiments* can be installed from PyPI via ``pip install rudiments`` as
+usual, see `releases <https://github.com/jhermann/rudiments/releases>`_
+on GitHub for an overview of available versions – the project uses
+`semantic versioning <http://semver.org/>`_ and follows
+`PEP 440 <https://www.python.org/dev/peps/pep-0440/>`_ conventions.
+To get a bleeding-edge version from source, use these commands:
+
+.. code-block:: shell
+
+    repo="jhermann/rudiments"
+    pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
+    pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
+
+See the following section on how to create a full development environment.
+
+
+
+Contributing
+------------
+
+To create a working directory for this project, call these commands:
+
+.. code-block:: shell
+
+    git clone "https://github.com/jhermann/rudiments.git"
+    cd "rudiments"
+    . .env --yes --develop
+    invoke build --docs test check
+
+See :doc:`CONTRIBUTING` for more.
+
+
+Documentation Contents
+----------------------
 
 .. toctree::
     :maxdepth: 4
 
     usage
     fullapi
+    CONTRIBUTING
+
+
+References
+----------
+
+Tools
+^^^^^
+
+-  `Cookiecutter <http://cookiecutter.readthedocs.org/en/latest/>`_
+-  `PyInvoke <http://www.pyinvoke.org/>`_
+-  `pytest <http://pytest.org/latest/contents.html>`_
+-  `tox <https://tox.readthedocs.org/en/latest/>`_
+-  `Pylint <http://docs.pylint.org/>`_
+-  `twine <https://github.com/pypa/twine#twine>`_
+-  `bpython <http://docs.bpython-interpreter.org/>`_
+-  `yolk3k <https://github.com/myint/yolk#yolk>`_
+
+Packages
+^^^^^^^^
+
+-  `Rituals <https://jhermann.github.io/rituals>`_
 
 
 Indices and Tables
