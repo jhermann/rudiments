@@ -164,7 +164,17 @@ class Configuration(object):
         self.load().write(to or sys.stdout)
 
     def section(self, ctx):
-        """Return section of the config for a specific context (sub-command)."""
+        """
+            Return section of the config for a specific context (sub-command).
+
+            Parameters:
+                ctx (Context): The Click context object.
+
+            Returns:
+                Section: The configuration section belonging to
+                    the active (sub-)command (based on ``ctx.info_name``).
+
+        """
         values = self.load()
         try:
             return values[ctx.info_name]
@@ -172,7 +182,21 @@ class Configuration(object):
             raise LoggedFailure("Configuration section '{}' not found!".format(ctx.info_name))
 
     def get(self, name, default=NO_DEFAULT):
-        """Return the specified key from the root section."""
+        """
+            Return the specified name from the root section.
+
+            Parameters:
+                name (str): The name of the requested value.
+                default (optional): If set, the default value to use
+                    instead of raising :class:`LoggedFailure` for
+                    unknown names.
+
+            Returns:
+                The value for `name`.
+
+            Raises:
+                LoggedFailure: The requested `name` was not found.
+        """
         values = self.load()
         try:
             return values[name]
