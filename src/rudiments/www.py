@@ -49,10 +49,11 @@ def url_as_file(url, ext=None):
         Yields:
             str: The path to a temporary file with the content of the URL.
 
-        >>> import io, re, json
-        >>> with url_as_file('https://api.github.com/meta', ext='json') as meta:
-        ...     meta, json.load(io.open(meta, encoding='ascii'))['hooks']
-        (u'/tmp/www-api.github.com-Ba5OhD.json', [u'192.30.252.0/22'])
+        Example:
+            >>> import io, re, json
+            >>> with url_as_file('https://api.github.com/meta', ext='json') as meta:
+            ...     meta, json.load(io.open(meta, encoding='ascii'))['hooks']
+            (u'/tmp/www-api.github.com-Ba5OhD.json', [u'192.30.252.0/22'])
     """
     if ext:
         ext = '.' + ext.strip('.')  # normalize extension
