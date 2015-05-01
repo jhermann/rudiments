@@ -92,7 +92,7 @@ the ``ls`` alias to the official ``list`` command name:
         # …
 
 
-Finally, the biggest addition, is a default configuration parsing machinery in
+Finally, the biggest addition is a default configuration parsing machinery in
 the :class:`rudiments.reamed.click.Configuration` class. It should be instantiated
 in your root command, passing in the (optional) name of a specific configuration file,
 or a path of such files.
