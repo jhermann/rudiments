@@ -137,7 +137,7 @@ class Configuration(object):
                 continue
             if os.path.isdir(config_files):
                 config_files = [os.path.join(config_files, i)
-                                for i in os.listdir(config_files)
+                                for i in sorted(os.listdir(config_files))
                                 if i.endswith('.conf')]
             else:
                 config_files = [config_files]
