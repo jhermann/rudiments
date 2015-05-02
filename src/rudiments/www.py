@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-continuation
 """ WWW access helpers.
+
+    You need a dependency on
+    `requests <http://docs.python-requests.org/en/latest/api/>`_
+    in your project if you use this module.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
 #
@@ -48,6 +52,10 @@ def url_as_file(url, ext=None):
 
         Yields:
             str: The path to a temporary file with the content of the URL.
+
+        Raises:
+            requests.RequestException: Base exception of ``requests``, see its
+                docs for more detailed ones.
 
         Example:
             >>> import io, re, json
