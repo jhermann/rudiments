@@ -33,7 +33,8 @@ the context unless you removed or moved it yourself before that.
 Extensions to 3rd Party Libraries
 ---------------------------------
 
-The sub-package :mod:`rudiments.reamed` contains modules that extend the API of some outside library.
+The sub-package :mod:`rudiments.reamed` contains modules that
+extend the API of some outside library.
 
 Note that you need to add the underlying package to your dependencies
 in addition to rudiments, in case you use one of the modules in that sub-package.
