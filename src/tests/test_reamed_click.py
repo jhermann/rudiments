@@ -217,3 +217,8 @@ class ConfigurationTests(object):
         cfg = Configuration('foobarbaz_wont_exist_ever')
         with pytest.raises(click.LoggedFailure):
             cfg.get('foo')
+
+    def test_locations_with_a_project_name(self):
+        cfg = Configuration('foo', project='bar')
+        assert cfg.config_paths[0] == '/etc/bar/foo.conf', "Default config paths are used"
+        assert cfg.config_paths[1].split(os.sep)[-2:] == ['bar', 'foo.conf']
