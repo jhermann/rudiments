@@ -45,7 +45,7 @@ def load_module(modulename, modulepath):
     """ Load a Python module from a path under a specified name.
 
         Parameters:
-            modulename (str): Fully qualified mudule name, e.g. ``x.y.z``.
+            modulename (str): Fully qualified module name, e.g. ``x.y.z``.
             modulepath (str): Directory to scan for module.
 
         Returns:
