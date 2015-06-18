@@ -83,16 +83,20 @@ class Configuration(object):
     """
 
     NO_DEFAULT = object()
+    DEFAULT_PATH = [
+        '/etc/{appname}.conf',
+        '{appcfg}.conf',
+    ]
 
     @classmethod
-    def from_context(cls, ctx, config_paths=None):
+    def from_context(cls, ctx, config_paths=None, project=None):
         """Create a configuration object, and initialize the Click context with it."""
         if ctx.obj is None:
             ctx.obj = Bunch()
-        ctx.obj.cfg = cls(ctx.info_name, config_paths)
+        ctx.obj.cfg = cls(ctx.info_name, config_paths, project=project)
         return ctx.obj.cfg
 
-    def __init__(self, name, config_paths=None):
+    def __init__(self, name, config_paths=None, project=None):
         """ Set up static knowledge about configuration.
 
             ``config_paths`` is a list of PATHs to config files or directories.
@@ -103,15 +107,17 @@ class Configuration(object):
             be appended to the default locations.
         """
         self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
+        self.project = project
         self.name = name
         self.config_paths = []
         self.loaded = False
 
         env_config = os.environ.get((self.name + '-config').upper().replace('-', '_'), '')
-        defaults = [
-            '/etc/{}.conf'.format(self.name),
-            os.path.join(get_app_dir(self.name) + '.conf'),
-        ] + [i for i in env_config.split(os.pathsep) if i]
+        defaults = [i.format(appname=os.sep.join([self.project, self.name]) if project else self.name,
+                             appdir=get_app_dir(self.project or self.name),
+                             appcfg=get_app_dir(self.project) + os.sep + self.name if self.project else get_app_dir(self.name))
+                for i in self.DEFAULT_PATH
+            ] + [i for i in env_config.split(os.pathsep) if i]
 
         for path in config_paths or []:
             for name in path.split(os.pathsep):
