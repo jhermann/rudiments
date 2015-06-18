@@ -1,5 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
+# pylint: disable=unidiomatic-typecheck
 """ Test «some_module».
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
@@ -52,7 +53,7 @@ class ImportTests(object):
             rootdir = os.path.dirname(rootdir)
 
         lm_setup = pysupport.load_module("rudiments._lm_setup", os.path.join(rootdir, "setup.py"))
-        from rudiments import _lm_setup
+        from rudiments import _lm_setup  # pylint: disable=no-name-in-module
 
         assert _lm_setup is lm_setup
         assert 'project' in dir(lm_setup)
