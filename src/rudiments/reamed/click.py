@@ -160,7 +160,10 @@ class Configuration(object):
         if not self.loaded:
             self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
             for path in self.locations():
-                part = configobj.ConfigObj(infile=path, encoding='utf-8', default_encoding='utf-8')
+                try:
+                    part = configobj.ConfigObj(infile=path, encoding='utf-8', default_encoding='utf-8')
+                except configobj.ConfigObjError as cause:
+                    raise LoggedFailure("Error in file '{path}': {cause}".format(path=pretty_path(path), cause=cause))
                 self.values.merge(part)
             self.loaded = True
         return self.values
