@@ -52,7 +52,9 @@ Project | Description
 [pyparsing](https://pyparsing.wikispaces.com/) | A library of classes that allows to construct a grammar in pure Python code
 [Requests](http://docs.python-requests.org/en/latest/) | Anything HTTP
 [sh](http://amoffat.github.io/sh/) | Full-fledged subprocess interface, treat any program as if it were a function
+[sorted_containers](https://github.com/grantjenks/sorted_containers) | Ordered collections (list, dict, set), pure Python and as fast as C
 [Soupy](http://soupy.readthedocs.org/) | Soupy wraps a fluent query interface around BeautifulSoup.
+
 
 The following help you with writing your unit and integration tests.
 
