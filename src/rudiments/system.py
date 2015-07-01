@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=bad-continuation
+# pylint: disable=bad-continuation, bad-whitespace
 """ Operating system related stdlib extensions.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
