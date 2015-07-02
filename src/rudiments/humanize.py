@@ -21,30 +21,75 @@ from __future__ import absolute_import, unicode_literals, print_function
 IEC_UNITS = ('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB')
 
 
-def bytes2iec(bytes, compact=False):
+def bytes2iec(size, compact=False):
     """ Convert a size value in bytes to its equivalent in IEC notation.
 
         See `<http://physics.nist.gov/cuu/Units/binary.html>`_.
 
         Parameters:
-            bytes (int): Number of bytes.
+            size (int): Number of bytes.
 
         Return:
-            String representation of ``bytes``.
+            String representation of ``size``.
 
         Raises:
-            ValueError: Negative or out of bounds value for ``bytes``.
+            ValueError: Negative or out of bounds value for ``size``.
     """
     postfn = lambda text: text.replace(' ', '') if compact else text
-    if bytes < 0:
-        raise ValueError("Negative byte size value {}".format(bytes))
-    if bytes < 1024:
-        return postfn('{:4d} bytes'.format(bytes))
+    if size < 0:
+        raise ValueError("Negative byte size value {}".format(size))
+    if size < 1024:
+        return postfn('{:4d} bytes'.format(size))
 
-    scaled = bytes
+    scaled = size
     for iec_unit in IEC_UNITS[1:]:
         scaled /= 1024.0
         if scaled < 1024:
             return postfn('{:6.1f} {}'.format(scaled, iec_unit))
 
-    raise ValueError("Byte size value {} out of bounds".format(bytes))
+    raise ValueError("Byte size value {} out of bounds".format(size))
+
+
+def iec2bytes(size_spec, only_positive=True):
+    """ Convert a size specification, optionally containing a scaling
+        unit in IEC notation, to a number of bytes.
+
+        Parameters:
+            size_spec (str): Number, optionally followed by a unit.
+            only_positive (bool): Allow only positive values?
+
+        Return:
+            Numeric bytes size.
+
+        Raises:
+            ValueError: Unknown unit specifiers, or bad leading integer.
+    """
+    scale = 1
+    try:
+        size = 0 + size_spec  # return numeric values as-is
+    except (TypeError, ValueError):
+        spec = size_spec.strip().lower()
+
+        for exp, iec_unit in enumerate(IEC_UNITS[1:], 1):
+            iec_unit = iec_unit.lower()
+            if spec.endswith(iec_unit):
+                spec = spec[:-len(iec_unit)]
+                scale = 2 ** (10 * exp)
+                break
+            elif spec.endswith(iec_unit[0]):
+                spec = spec[:-1]
+                scale = 2 ** (10 * exp)
+                break
+        else:
+            if spec.endswith('b'):
+                spec = spec[:-1]
+
+        try:
+            size = int(spec.strip(), base=0)
+        except (TypeError, ValueError) as cause:
+            raise ValueError('Invalid bytes size specification {!r}: {}'.format(size_spec, cause))
+
+    if only_positive and size < 0:
+        raise ValueError('Invalid negative bytes size specification {!r}'.format(size_spec))
+
+    return size * scale

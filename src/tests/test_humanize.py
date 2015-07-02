@@ -22,6 +22,8 @@ import pytest
 
 from rudiments import humanize
 
+#############################################################################
+# bytes2iec
 
 def test_bytes_to_iec_negative_number():
     with pytest.raises(ValueError):
@@ -49,3 +51,49 @@ def test_bytes_to_iec_overflow():
     assert humanize.bytes2iec(2**90 - 2**80) == '1023.0 YiB'
     with pytest.raises(ValueError):
         humanize.bytes2iec(2**90)
+
+
+#############################################################################
+# iec2bytes
+
+def test_iec_to_bytes_bad_number():
+    for bad in ('', '0O9', '0b2', '0xZZZ', 'abc', 'b', 'kib', ' kib'):
+        with pytest.raises(ValueError):
+            humanize.iec2bytes(bad)
+
+
+def test_iec_to_bytes_bad_unit():
+    for bad in ('bytes', 'zz', 'a', ' 0', 'zkib', 'mb'):
+        with pytest.raises(ValueError):
+            humanize.iec2bytes('1'+bad)
+
+
+def test_iec_to_bytes_negative_numbers():
+    for bad in (-1, '-1', '-42KiB'):
+        assert humanize.iec2bytes(bad, only_positive=False) < 0, "{} returns negative size".format(bad)
+        with pytest.raises(ValueError):
+            humanize.iec2bytes(bad)
+
+
+def test_iec_to_bytes_already_a_number():
+    assert humanize.iec2bytes(0) == 0
+    assert humanize.iec2bytes(1024) == 1024
+
+
+def test_iec_to_bytes_bases():
+    for spec in ('42', '0b101', '0O7', '0x42'):
+        assert humanize.iec2bytes(spec) == int(spec, base=0)
+
+
+def test_iec_to_bytes_units():
+    for exp, iec_unit in enumerate(humanize.IEC_UNITS):
+        assert humanize.iec2bytes('1' + iec_unit) == 2 ** (10 * exp)
+        assert humanize.iec2bytes('1' + iec_unit.lower()) == 2 ** (10 * exp)
+        assert humanize.iec2bytes('1' + iec_unit.upper()) == 2 ** (10 * exp)
+        assert humanize.iec2bytes('1  ' + iec_unit) == 2 ** (10 * exp)
+        assert humanize.iec2bytes(' 1 ' + iec_unit + ' ') == 2 ** (10 * exp)
+
+
+def test_iec_to_bytes_short_units():
+    for exp, iec_unit in enumerate(humanize.IEC_UNITS):
+        assert humanize.iec2bytes('1' + iec_unit[0]) == 2 ** (10 * exp)
