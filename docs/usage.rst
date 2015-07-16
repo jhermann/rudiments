@@ -30,6 +30,60 @@ local filesystem paths. House-keeping is automatic, so the file is removed on le
 the context unless you removed or moved it yourself before that.
 
 
+Humanized Input and Output
+--------------------------
+
+For accepting input from prompts and configuration files, and presenting values
+in a form easily parsed by humans, the :mod:`rudiments.humanize` module offers
+conversions functions for common data types.
+
+For handling byte sizes in `IEC binary units`_, use
+:func:`rudiments.humanize.bytes2iec` and :func:`rudiments.humanize.iec2bytes`.
+Examples::
+
+    >>> bytes2iec(1536), bytes2iec(10**9)
+    (u'   1.5 KiB', u' 953.7 MiB')
+    >>> bytes2iec(1536, compact=True)
+    u'1.5KiB'
+    >>> iec2bytes(1), iec2bytes('64k'), iec2bytes('1.234TiB')
+    (1, 65536, 1356797348675)
+
+By default, the formatted values are suited for tabulated output (they're all the same length);
+when passing ``compact=True``, you'll get a result that better fits into log messages.
+
+
+.. _`IEC binary units`: http://physics.nist.gov/cuu/Units/binary.html
+
+
+Python Runtime Support
+----------------------
+
+Use the :mod:`rudiments.pysupport` module to access some helpers which
+hide internals of the Python interpreter runtime and provide an easier to use interface.
+
+The functions :func:`rudiments.pysupport.import_name`
+and :func:`rudiments.pysupport.load_module`
+can be used for dynamic imports and adding a simple plugin system to your application.
+
+To help with keeping code portable between Python 2.7 and 3.x,
+the :mod:`rudiments._compat` module offers unified names and semantics
+for common features that differ between current and legacy Python versions.
+It is based on the module with the same name found in `Jinja2`_.
+
+
+.. _`Jinja2`: http://jinja.pocoo.org/
+
+
+Operating System Related Extensions
+-----------------------------------
+
+In :mod:`rudiments.system`, you find low-level extensions to stdlib modules like
+``os`` and ``sys``.
+
+Constants in this module that start with ``EX_`` are standard exit codes to be used
+with ``sys.exit()``, as defined in the C header file ``sysexits.h``.
+
+
 Extensions to 3rd Party Libraries
 ---------------------------------
 
