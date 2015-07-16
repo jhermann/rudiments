@@ -27,6 +27,16 @@ extensions to other support packages that don't warrant their own project,
 in the :mod:`rudiments.reamed` package.
 
 
+Important Links
+---------------
+
+  * `GitHub Project <https://github.com/jhermann/rudiments>`_
+  * `Issue Tracker <https://github.com/jhermann/rudiments/issues>`_
+  * `PyPI <https://pypi.python.org/pypi/rudiments/>`_
+  * `Latest Documentation <https://rudiments.readthedocs.org/en/latest/>`_
+  * `Mailing List <http://librelist.com/browser/python.rudiments/>`_
+
+
 Installing
 ----------
 
