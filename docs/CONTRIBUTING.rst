@@ -40,7 +40,7 @@ Here's a quick guide to improve the code:
 5. Make sure the documentation builds without errors
    (``invoke build --docs``).
 6. Push to your fork and submit a `pull
-   request <https://help.github.com/articles/using-pull-requests/>`_.
+   request <https://help.github.com/articles/using-pull-requests/>`__.
 
 Please be patient while waiting for a review. Life & work tend to
 interfere.
@@ -48,19 +48,19 @@ interfere.
 Details on contributing code
 ----------------------------
 
-This project is written in `Python <http://www.python.org/>`_, and the
+This project is written in `Python <http://www.python.org/>`__, and the
 documentation is generated using
-`Sphinx <https://pypi.python.org/pypi/Sphinx>`_.
-`setuptools <https://packaging.python.org/en/latest/projects.html#setuptools>`_
-and `Invoke <http://www.pyinvoke.org/>`_ are used to build and manage
+`Sphinx <https://pypi.python.org/pypi/Sphinx>`__.
+`setuptools <https://packaging.python.org/en/latest/projects.html#setuptools>`__
+and `Invoke <http://www.pyinvoke.org/>`__ are used to build and manage
 the project. Tests are written and executed using
-`pytest <http://pytest.org/>`_ and `tox <https://testrun.org/tox/>`_.
+`pytest <http://pytest.org/>`__ and `tox <https://testrun.org/tox/>`__.
 
 Set up a working development environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To set up a working directory from your own fork, follow `these
-steps <https://github.com/jhermann/rudiments#contributing>`_, but
+steps <https://github.com/jhermann/rudiments#contributing>`__, but
 replace the repository ``https`` URLs with SSH ones that point to your
 fork.
 
@@ -75,7 +75,7 @@ For any cohesive set of changes, create a *new* branch based on the
 current upstream ``master``, with a name reflecting the essence of your
 improvement.
 
-::
+.. code:: sh
 
     git branch "name-for-my-fixes" origin/master
     git checkout "name-for-my-fixes"
@@ -95,7 +95,7 @@ Some things that will increase the chance that your pull request is
 accepted:
 
 -  Follow style conventions you see used in the source already (and read
-   `PEP8 <http://www.python.org/dev/peps/pep-0008/>`_).
+   `PEP8 <http://www.python.org/dev/peps/pep-0008/>`__).
 -  Include tests that fail *without* your code, and pass *with* it. Only
    minor refactoring and documentation changes require no new tests. If
    you are adding functionality or fixing a bug, please also add a test
