@@ -16,10 +16,34 @@ Subpackages
 Submodules
 ----------
 
+rudiments.humanize module
+-------------------------
+
+.. automodule:: rudiments.humanize
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 rudiments.morph module
 ----------------------
 
 .. automodule:: rudiments.morph
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+rudiments.pysupport module
+--------------------------
+
+.. automodule:: rudiments.pysupport
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+rudiments.system module
+-----------------------
+
+.. automodule:: rudiments.system
     :members:
     :undoc-members:
     :show-inheritance:
