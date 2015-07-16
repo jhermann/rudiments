@@ -85,6 +85,11 @@ def test_iec_to_bytes_bases():
         assert humanize.iec2bytes(spec) == int(spec, base=0)
 
 
+def test_iec_to_bytes_with_float_value():
+    assert humanize.iec2bytes('1.5K') == 1024 + 512
+    assert humanize.iec2bytes('1.5B') == 1
+
+
 def test_iec_to_bytes_units():
     for exp, iec_unit in enumerate(humanize.IEC_UNITS):
         assert humanize.iec2bytes('1' + iec_unit) == 2 ** (10 * exp)

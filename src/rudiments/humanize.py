@@ -28,6 +28,7 @@ def bytes2iec(size, compact=False):
 
         Parameters:
             size (int): Number of bytes.
+            compact (bool): If ``True``, the result contains no spaces.
 
         Return:
             String representation of ``size``.
@@ -66,7 +67,7 @@ def iec2bytes(size_spec, only_positive=True):
     """
     scale = 1
     try:
-        size = 0 + size_spec  # return numeric values as-is
+        size = int(0 + size_spec)  # return numeric values as-is
     except (TypeError, ValueError):
         spec = size_spec.strip().lower()
 
@@ -85,11 +86,14 @@ def iec2bytes(size_spec, only_positive=True):
                 spec = spec[:-1]
 
         try:
-            size = int(spec.strip(), base=0)
+            if '.' in spec:
+                size = float(spec.strip())
+            else:
+                size = int(spec.strip(), base=0)
         except (TypeError, ValueError) as cause:
             raise ValueError('Invalid bytes size specification {!r}: {}'.format(size_spec, cause))
 
     if only_positive and size < 0:
         raise ValueError('Invalid negative bytes size specification {!r}'.format(size_spec))
 
-    return size * scale
+    return int(size * scale)
