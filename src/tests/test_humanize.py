@@ -102,3 +102,35 @@ def test_iec_to_bytes_units():
 def test_iec_to_bytes_short_units():
     for exp, iec_unit in enumerate(humanize.IEC_UNITS):
         assert humanize.iec2bytes('1' + iec_unit[0]) == 2 ** (10 * exp)
+
+
+#############################################################################
+# merge_adjacent
+
+merge_adjacent_data = [
+    ([], []),
+    ([2, 3, 1], ["1..3"]),
+    ([1, 4, 2], ["1..2", "4"]),
+    (['0b1', '002', '0x3'], ["0b1..0x3"]),
+    ([], []),
+]
+
+@pytest.mark.parametrize("numbers,expected", merge_adjacent_data)
+def test_merge_adjacent_basic(numbers, expected):
+    result = humanize.merge_adjacent(numbers)
+    assert result == expected
+
+
+def test_merge_adjacent_with_custom_indicator():
+    result = humanize.merge_adjacent("123", '-')
+    assert result == ["1-3"]
+
+
+def test_merge_adjacent_with_explicit_base():
+    result = humanize.merge_adjacent(['10', '3'], base=4)
+    assert result == ["3..10"]
+
+
+def test_merge_adjacent_not_numeric():
+    with pytest.raises((TypeError, ValueError)):
+        humanize.merge_adjacent("xyz")

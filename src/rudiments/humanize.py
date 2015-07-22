@@ -97,3 +97,29 @@ def iec2bytes(size_spec, only_positive=True):
         raise ValueError('Invalid negative bytes size specification {!r}'.format(size_spec))
 
     return int(size * scale)
+
+
+def merge_adjacent(numbers, indicator='..', base=0):
+    """ Merge adjacent numbers in an iterable of numbers.
+
+        Parameters:
+            numbers (list): List of integers or numeric strings.
+            indicator (str): Delimiter to indicate generated ranges.
+            base (int): Passed to the `int()` conversion when comparing numbers.
+
+        Return:
+            list of str: Condensed sequence with either ranges or isolated numbers.
+    """
+    integers = list(sorted([(int("%s" % i, base), i) for i in numbers]))
+    idx = 0
+    result = []
+    while idx < len(numbers):
+        end = idx + 1
+        while end < len(numbers) and integers[end-1][0] == integers[end][0] - 1:
+            end += 1
+
+        result.append("%s%s%s" % (integers[idx][1], indicator, integers[end-1][1])
+                      if end > idx + 1
+                      else "%s" % integers[idx][1])
+        idx = end
+    return result
