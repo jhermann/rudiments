@@ -85,6 +85,7 @@ class Configuration(object):
     NO_DEFAULT = object()
     DEFAULT_PATH = [
         '/etc/{appname}.conf',
+        '/etc/{appname}.d/',
         '{appcfg}.conf',
     ]
 
