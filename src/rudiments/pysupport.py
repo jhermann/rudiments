@@ -46,7 +46,7 @@ def load_module(modulename, modulepath):
 
         Parameters:
             modulename (str): Fully qualified module name, e.g. ``x.y.z``.
-            modulepath (str): Directory to scan for module.
+            modulepath (str): Filename of the module.
 
         Returns:
             Loaded module.
