@@ -147,7 +147,8 @@ class ConfigurationTests(object):
     def test_configuration_default_uses_app_dir(self):
         name = 'foobarbaz_wont_exist_ever'
         cfg = Configuration(name)
-        assert cfg.locations(exists=False)[1] == click.get_app_dir(name) + '.conf'
+        app_dir_idx = len(Configuration.DEFAULT_PATH) - 1
+        assert cfg.locations(exists=False)[app_dir_idx] == click.get_app_dir(name) + '.conf'
 
     def test_configuration_locations_eliminates_dupes(self):
         cfg = Configuration('foobarbaz_wont_exist_ever', ['', ''])
@@ -221,4 +222,5 @@ class ConfigurationTests(object):
     def test_locations_with_a_project_name(self):
         cfg = Configuration('foo', project='bar')
         assert cfg.config_paths[0] == '/etc/bar/foo.conf', "Default config paths are used"
-        assert cfg.config_paths[1].split(os.sep)[-2:] == ['bar', 'foo.conf']
+        assert cfg.config_paths[1] == '/etc/bar/foo.d/'
+        assert cfg.config_paths[2].split(os.sep)[-2:] == ['bar', 'foo.conf']
