@@ -35,7 +35,7 @@ Humanized Input and Output
 
 For accepting input from prompts and configuration files, and presenting values
 in a form easily parsed by humans, the :mod:`rudiments.humanize` module offers
-conversions functions for common data types.
+conversion functions for common data types.
 
 For handling byte sizes in `IEC binary units`_, use
 :func:`rudiments.humanize.bytes2iec` and :func:`rudiments.humanize.iec2bytes`.
@@ -50,6 +50,12 @@ Examples::
 
 By default, the formatted values are suited for tabulated output (they're all the same length);
 when passing ``compact=True``, you'll get a result that better fits into log messages.
+
+To present lists of numbers in a compact form, collapsing consecutive ranges,
+:func:`rudiments.humanize.merge_adjacent` can be used.
+
+    >>> ', '. join(humanize.merge_adjacent(('9', 5, 10, 7) + tuple(range(5))))
+    u'0..5, 7, 9..10'
 
 
 .. _`IEC binary units`: http://physics.nist.gov/cuu/Units/binary.html
