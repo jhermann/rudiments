@@ -2,7 +2,7 @@
 # pylint: disable=invalid-name, unused-import, missing-docstring, exec-used
 # pylint: disable=unused-argument, too-few-public-methods, redefined-builtin
 # pylint: disable=no-name-in-module, no-member, undefined-variable
-# pylint: disable=import-error
+# pylint: disable=import-error, wrong-import-position, wrong-import-order
 # flake8: noqa
 """
     Some py2/py3 compatibility support based on a stripped down
