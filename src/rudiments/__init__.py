@@ -24,7 +24,7 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 __url__             = "https://github.com/jhermann/rudiments"
-__version__         = "0.2.0"
+__version__         = "0.2.1"
 __license__         = "Apache 2.0"
 __author__          = "Jürgen Hermann"
 __author_email__    = "jh@web.de"
