@@ -5,8 +5,6 @@
 # pylint: disable=import-error
 # flake8: noqa
 """
-    rudiments._compat
-
     Some py2/py3 compatibility support based on a stripped down
     version of six so there is no dependency on a specific version
     of it.
@@ -144,11 +142,19 @@ def with_metaclass(meta, *bases):
 
 
 try:
-    from urllib.parse import quote_from_bytes as url_quote
+    from html import unescape as html_unescape
 except ImportError:
-    from urllib import quote as url_quote
+    from HTMLParser import HTMLParser as _HTMLParser
+    html_unescape = _HTMLParser().unescape
 
 try:
-    from urllib.parse import urlparse
+    from urllib.parse import quote_from_bytes as url_quote
+    from urllib.parse import unquote, unquote_plus
 except ImportError:
-    from urlparse import urlparse
+    from urllib import quote as url_quote, unquote, unquote_plus
+
+try:
+    from urllib.parse import urlparse, urlunparse, parse_qs, parse_qsl, urlencode
+except ImportError:
+    from urlparse import urlparse, urlunparse, parse_qs, parse_qsl
+    from urllib import urlencode
