@@ -104,7 +104,7 @@ class Configuration(object):
             If that is non-empty, exactly those paths will be considered; an empty
             path element represents the default locations (just like in MANPATH).
 
-            If the environment variable ``‹prefix›_CONFIG`` is set, its value will
+            If the environment variable ``<prefix>_CONFIG`` is set, its value will
             be appended to the default locations.
         """
         self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
