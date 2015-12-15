@@ -1,4 +1,4 @@
-The 0.2.0 release primarily adds Sphinx documentation and the new module
+The 0.2.1 release primarily adds Sphinx documentation and the new module
 ``humanize`` for I/O of common values in forms understood by humans, e.g.
 byte sizes in IEC notation.
 
@@ -10,7 +10,7 @@ project, in the rudiments.reamed package.
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 Links:
 
-  * https://pypi.python.org/pypi/rudiments/0.2.0
+  * https://pypi.python.org/pypi/rudiments/0.2.1
   * https://rudiments.readthedocs.org/en/latest/
   * http://librelist.com/browser/python.rudiments/
 
@@ -23,4 +23,4 @@ Detailed changes:
   * chg: added '/etc/{appname}.d/' to default config paths
   * bug: need to sort any config.d listing
 
-See also https://github.com/jhermann/rudiments/releases/tag/v0.2.0
+See also https://github.com/jhermann/rudiments/releases/tag/v0.2.1
