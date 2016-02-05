@@ -88,6 +88,10 @@ class Configuration(object):
         '/etc/{appname}.d/',
         '{appcfg}.conf',
     ]
+    DEFAULT_CONFIG_OPTS = dict(
+        encoding='utf-8',
+        default_encoding='utf-8',
+    )
 
     @classmethod
     def from_context(cls, ctx, config_paths=None, project=None):
@@ -107,7 +111,7 @@ class Configuration(object):
             If the environment variable ``<prefix>_CONFIG`` is set, its value will
             be appended to the default locations.
         """
-        self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
+        self.values = configobj.ConfigObj({}, **self.DEFAULT_CONFIG_OPTS)
         self.project = project
         self.name = name
         self.config_paths = []
@@ -159,10 +163,10 @@ class Configuration(object):
     def load(self):
         """Load configuration from the defined locations."""
         if not self.loaded:
-            self.values = configobj.ConfigObj({}, encoding='utf-8', default_encoding='utf-8')
+            self.values = configobj.ConfigObj({}, **self.DEFAULT_CONFIG_OPTS)
             for path in self.locations():
                 try:
-                    part = configobj.ConfigObj(infile=path, encoding='utf-8', default_encoding='utf-8')
+                    part = configobj.ConfigObj(infile=path, **self.DEFAULT_CONFIG_OPTS)
                 except configobj.ConfigObjError as cause:
                     raise LoggedFailure("Error in file '{path}': {cause}".format(path=pretty_path(path), cause=cause))
                 self.values.merge(part)
