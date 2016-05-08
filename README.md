@@ -43,19 +43,19 @@ and are (hopefully) best-of-breed.
 
 Project | Description
 ----: | :----
-[Arrow](https://arrow.readthedocs.org/) | Better dates and times for Python
-[boltons](https://boltons.readthedocs.org/en/latest/) | A set of pure-Python utilities augmenting the stdlib
+[Arrow](https://arrow.readthedocs.io/) | Better dates and times for Python
+[boltons](https://boltons.readthedocs.io/en/latest/) | A set of pure-Python utilities augmenting the stdlib
 [Click](http://click.pocoo.org/) | Command line interface framework
 [colorama](https://pypi.python.org/pypi/colorama) | Cross-platform colored terminal text
-[configobj](http://configobj.readthedocs.org/en/latest/) | Config file reading, writing and validation
-[github3.py](http://github3py.readthedocs.org/) | GitHub API v3 client
+[configobj](http://configobj.readthedocs.io/en/latest/) | Config file reading, writing and validation
+[github3.py](http://github3py.readthedocs.io/) | GitHub API v3 client
 [netifaces](https://bitbucket.org/al45tair/netifaces) | Portable network interface information
 [pyparsing](https://pyparsing.wikispaces.com/) | A library of classes that allows to construct a grammar in pure Python code
 [poyo](https://github.com/hackebrot/poyo) | A pure-Python YAML parser
 [Requests](http://docs.python-requests.org/en/latest/) | Anything HTTP
 [sh](http://amoffat.github.io/sh/) | Full-fledged subprocess interface, treat any program as if it were a function
 [sorted_containers](https://github.com/grantjenks/sorted_containers) | Ordered collections (list, dict, set), pure Python and as fast as C
-[Soupy](http://soupy.readthedocs.org/) | Soupy wraps a fluent query interface around BeautifulSoup.
+[Soupy](http://soupy.readthedocs.io/) | Soupy wraps a fluent query interface around BeautifulSoup.
 
 
 The following help you with writing your unit and integration tests.
@@ -87,10 +87,10 @@ See [CONTRIBUTING](https://github.com/jhermann/rudiments/blob/master/CONTRIBUTIN
 
 **Tools**
 
-* [Cookiecutter](http://cookiecutter.readthedocs.org/en/latest/)
+* [Cookiecutter](http://cookiecutter.readthedocs.io/en/latest/)
 * [PyInvoke](http://www.pyinvoke.org/)
 * [pytest](http://pytest.org/latest/contents.html)
-* [tox](https://tox.readthedocs.org/en/latest/)
+* [tox](https://tox.readthedocs.io/en/latest/)
 * [Pylint](http://docs.pylint.org/)
 * [twine](https://github.com/pypa/twine#twine)
 * [bpython](http://docs.bpython-interpreter.org/)
