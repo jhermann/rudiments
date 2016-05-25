@@ -40,6 +40,14 @@ rudiments.pysupport module
     :undoc-members:
     :show-inheritance:
 
+rudiments.security module
+-------------------------
+
+.. automodule:: rudiments.security
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 rudiments.system module
 -----------------------
 

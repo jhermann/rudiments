@@ -1,0 +1,8 @@
+machine foo.example.com
+    login john
+    password doe
+
+machine jane@foo.example.com
+    login jane
+    password base64
+    account c25hZnU=
