@@ -71,6 +71,8 @@ class Credentials(object):
                 self._get_auth_from_netrc(auth_url.hostname)
             if not self.auth_valid():
                 self._get_auth_from_console(auth_url.hostname)
+        else:
+            self._get_auth_from_console(self.target)
 
     def _get_auth_from_console(self, realm):
         """Prompt for the user and password."""
