@@ -24,6 +24,11 @@ import errno
 import getpass
 from netrc import netrc, NetrcParseError
 
+try:
+    import keyring
+except ImportError:
+    keyring = None
+
 from ._compat import urlparse
 
 __all__ = ['Credentials']
@@ -60,6 +65,8 @@ class Credentials(object):
                 self.user = auth_url.username
             if auth_url.password:
                 self.password = auth_url.password
+            if not self.auth_valid():
+                self._get_auth_from_keyring(auth_url.hostname)
             if not self.auth_valid():
                 self._get_auth_from_netrc(auth_url.hostname)
             if not self.auth_valid():
@@ -99,3 +106,9 @@ class Credentials(object):
                 self.password = account.decode('base64')
             elif password:
                 self.password = password
+
+    def _get_auth_from_keyring(self, hostname):
+        """Try to get credentials using `keyring <https://github.com/jaraco/keyring>`_."""
+        if not keyring:
+            return
+        # TODO: Implement this
