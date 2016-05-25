@@ -21,6 +21,7 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
 import logging
 
 import pytest
@@ -32,3 +33,9 @@ def logger():
     """Test logger instance as a fixture."""
     logging.basicConfig(level=logging.DEBUG)
     return logging.getLogger('tests')
+
+
+@pytest.fixture(scope='session')
+def datadir():
+    """Path to test data directory."""
+    return os.path.join(os.path.dirname(__file__), 'data')
