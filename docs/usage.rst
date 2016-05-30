@@ -30,6 +30,54 @@ local filesystem paths. House-keeping is automatic, so the file is removed on le
 the context unless you removed or moved it yourself before that.
 
 
+Security Helpers
+----------------
+
+Credentials Lookup
+^^^^^^^^^^^^^^^^^^
+
+When using HTTP APIs or other secured web resources, you are confronted with the
+question how to enable your users to store their credentials in a
+*secure but still convenient* fashion.
+The :class:`rudiments.security.Credentials` class tries to give an answer,
+by providing some common methods for credential lookup that occupy different
+spots in the secure vs. convenient spectrum.
+Given a *target* that requires authorization in the form of a username and password or API token,
+this class will try several methods to find matching credentials in ‘common’ places.
+
+For URLs (``http``, ``https``, ``ftp``, or ``ftps``), the following steps will be taken:
+
+* The URL's ``user@pwd`` part is checked first.
+* Next, the system's `keyring`_ is queried for an entry under the URL's host name.
+* Similarly, `~/.netrc` is scanned for matching entries next.
+* If nothing can be found, the user is prompted on the console.
+
+As a general fallback, any given target that is not an URL will ask the user
+for a username / password pair.
+
+The keyring and netrc are actually queried for two entries,
+``user@host`` first and ``host`` second.
+This allows the user to easily assume different roles on a target system,
+e.g. to access a normal and a privileged account.
+The ``user`` value is either taken from the URL,
+or else the user's login name is utilized.
+
+To use the class, create a :class:`rudiments.security.Credentials` object,
+passing in the *target*. Then to retrieve matching credentials, call the
+:func:`rudiments.security.Credentials.auth_pair` method.
+
+.. code-block:: python
+
+    access = Credentials('http://jane@doe.example.com')
+    username, password = access.auth_pair()
+
+Note that this allows to only prompt the user for a password when it's actually needed,
+but still create the credentials object early on, during some setup phase.
+
+
+.. _`keyring`: http://pythonhosted.org/keyring/
+
+
 Humanized Input and Output
 --------------------------
 
