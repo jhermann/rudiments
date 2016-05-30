@@ -18,6 +18,7 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import os
+import getpass
 
 import pytest
 
@@ -30,6 +31,57 @@ NETRC_TEST_CASES = [
     ('ftp://foo.example.com', 'john', 'doe'),
     ('ftps://foo.example.com', 'john', 'doe'),
 ]
+
+
+def test_credentials_lookup_from_netrc_is_optional(mocker):
+    console_input = mocker.patch(__name__ + '.Credentials._raw_input', return_value='')
+    mocker.patch('getpass.getpass', return_value='sesame')
+    netrc = mocker.patch('rudiments.security.netrc')
+    netrc.side_effect = IOError(2, "not found", "netrc")
+
+    access = Credentials('http://jane@no-netrc.example.com')
+    auth = access.auth_pair()
+    console_input.assert_called_once()
+
+    with pytest.raises(IOError):
+        netrc.side_effect = IOError(13, "cannot open", "netrc")
+        access = Credentials('http://jane@no-netrc.example.com')
+        auth = access.auth_pair()
+
+
+def test_credentials_lookup_for_non_url_target(mocker):
+    console_input = mocker.patch(__name__ + '.Credentials._raw_input', return_value='')
+    mocker.patch('getpass.getpass', return_value='sesame')
+
+    access = Credentials('some custom target')
+    auth = access.auth_pair()
+
+    console_input.assert_called_once()
+    assert auth == (getpass.getuser(), 'sesame')
+
+
+def test_credentials_lookup_from_console(mocker):
+    console_input = mocker.patch(__name__ + '.Credentials._raw_input', return_value='')
+    mocker.patch('getpass.getpass', return_value='sesame')
+
+    access = Credentials('http://console.example.com')
+    console_input.assert_not_called()
+    auth = access.auth_pair()
+    console_input.assert_called_once()
+
+    assert auth == (getpass.getuser(), 'sesame')
+    assert Credentials.AUTH_MEMOIZE_INPUT['console.example.com'] == access.auth_pair()
+
+    # test memoization explicitly
+    access = Credentials('http://console.example.com')
+    auth = access.auth_pair()
+    console_input.assert_called_once()
+
+    # test with other realm
+    access = Credentials('http://terminal.example.com')
+    auth = access.auth_pair()
+    assert console_input.call_count == 2
+    assert 'terminal.example.com' in Credentials.AUTH_MEMOIZE_INPUT
 
 
 def test_credentials_lookup_from_url():

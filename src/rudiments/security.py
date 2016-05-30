@@ -39,7 +39,7 @@ class Credentials(object):
 
     URL_RE = re.compile(r'^(http|https|ftp|ftps)://')  # covers the common use cases
     NETRC_FILE = None  # use the default, unless changed for test purposes
-    AUTH_MEMOIZE_INPUT = None, None  # remember manual auth input across several queries in one run
+    AUTH_MEMOIZE_INPUT = {}  # remember manual auth input across several queries in one run
 
     def __init__(self, target):
         """``target`` is a representation of the secured object, typically an URL."""
@@ -56,6 +56,10 @@ class Credentials(object):
         if not self.auth_valid():
             self._get_auth()
         return (self.user, self.password)
+
+    def _raw_input(self, prompt=None):
+        """Mockable wrapper for raw_input."""
+        return raw_input(prompt)   # pragma: no cover
 
     def _get_auth(self):
         """Try to get login auth from known sources."""
@@ -76,12 +80,12 @@ class Credentials(object):
 
     def _get_auth_from_console(self, realm):
         """Prompt for the user and password."""
-        self.user, self.password = self.AUTH_MEMOIZE_INPUT
+        self.user, self.password = self.AUTH_MEMOIZE_INPUT.get(realm, (None, None))
         if not self.auth_valid():
             login = getpass.getuser()
-            self.user = raw_input('Username for {} [{}]: '.format(realm, login)) or login
+            self.user = self._raw_input('Username for {} [{}]: '.format(realm, login)) or login
             self.password = getpass.getpass('Password: ')
-            Credentials.AUTH_MEMOIZE_INPUT = self.user, self.password
+            Credentials.AUTH_MEMOIZE_INPUT[realm] = self.user, self.password
 
     def _get_auth_from_netrc(self, hostname):
         """Try to find login auth in ``~/.netrc``."""
