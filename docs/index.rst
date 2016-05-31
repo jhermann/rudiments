@@ -82,6 +82,7 @@ Documentation Contents
     :maxdepth: 4
 
     usage
+    end-user
     fullapi
     CONTRIBUTING
     LICENSE

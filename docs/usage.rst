@@ -42,25 +42,8 @@ question how to enable your users to store their credentials in a
 The :class:`rudiments.security.Credentials` class tries to give an answer,
 by providing some common methods for credential lookup that occupy different
 spots in the secure vs. convenient spectrum.
-Given a *target* that requires authorization in the form of a username and password or API token,
-this class will try several methods to find matching credentials in ‘common’ places.
-
-For URLs (``http``, ``https``, ``ftp``, or ``ftps``), the following steps will be taken:
-
-* The URL's ``user@pwd`` part is checked first.
-* Next, the system's `keyring`_ is queried for an entry under the URL's host name.
-* Similarly, `~/.netrc` is scanned for matching entries next.
-* If nothing can be found, the user is prompted on the console.
-
-As a general fallback, any given target that is not an URL will ask the user
-for a username / password pair.
-
-The keyring and netrc are actually queried for two entries,
-``user@host`` first and ``host`` second.
-This allows the user to easily assume different roles on a target system,
-e.g. to access a normal and a privileged account.
-The ``user`` value is either taken from the URL,
-or else the user's login name is utilized.
+See :ref:`auth-credentials` for details regarding usage from the viewpoint
+of an end-user and some information about the availabe credential providers.
 
 To use the class, create a :class:`rudiments.security.Credentials` object,
 passing in the *target*. Then to retrieve matching credentials, call the
@@ -73,9 +56,6 @@ passing in the *target*. Then to retrieve matching credentials, call the
 
 Note that this allows to only prompt the user for a password when it's actually needed,
 but still create the credentials object early on, during some setup phase.
-
-
-.. _`keyring`: http://pythonhosted.org/keyring/
 
 
 Humanized Input and Output
@@ -117,7 +97,7 @@ hide internals of the Python interpreter runtime and provide an easier to use in
 
 The functions :func:`rudiments.pysupport.import_name`
 and :func:`rudiments.pysupport.load_module`
-can be used for dynamic imports and adding a simple plugin system to your application.
+can be used for dynamic imports and adding a simple plug-in system to your application.
 
 To help with keeping code portable between Python 2.7 and 3.x,
 the :mod:`rudiments._compat` module offers unified names and semantics
