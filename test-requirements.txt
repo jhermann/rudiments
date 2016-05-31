@@ -6,7 +6,7 @@ pytest==2.8.4
 pytest-spec==0.2.24
 pytest-cov==2.2.0
 pytest-mock
-mock==2.0.0
+mock==2.0.0 ; python_version == '2.7'
 py>=1.4.29
 coveralls==1.1
 sh==1.11
@@ -17,3 +17,8 @@ responses==0.3.0
 bunch==1.0.1
 click==3.3
 configobj>=5
+
+# requirements for `security.Crednetials`
+keyring==9.0
+secretstorage ; sys_platform == 'linux2'
+dbus-python ; sys_platform == 'linux2'
