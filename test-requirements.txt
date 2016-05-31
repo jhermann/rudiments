@@ -18,7 +18,7 @@ bunch==1.0.1
 click==3.3
 configobj>=5
 
-# requirements for `security.Crednetials`
+# requirements for `security.Credentials`
 keyring==9.0
-secretstorage ; sys_platform == 'linux2'
-dbus-python ; sys_platform == 'linux2'
+##secretstorage ; sys_platform == 'linux2'
+##dbus-python ; sys_platform == 'linux2'

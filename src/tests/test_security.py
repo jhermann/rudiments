@@ -20,6 +20,11 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 import getpass
 
+try:
+    from unittest.mock import call
+except ImportError:
+    from mock import call
+
 import pytest
 
 from rudiments.security import *
@@ -85,7 +90,7 @@ def test_credentials_lookup_from_console(mocker):
 
 
 def test_credentials_lookup_from_url():
-    access = Credentials('http://jane:bar@foo.example.com')
+    access = Credentials('http://jane:bar@url.example.com')
     assert access.auth_pair() == ('jane', 'bar')
 
 
@@ -102,3 +107,16 @@ def test_credentials_lookup_from_netrc(datadir, url, name, pwd):
         assert access.auth_valid(), "Should be True"
     finally:
         Credentials.NETRC_FILE = None
+
+
+def test_credentials_lookup_from_keyring(mocker):
+    get_pwd = mocker.patch('keyring.get_password')
+    get_pwd.side_effect = (None, 'round')
+    access = Credentials('http://jane@keyring.example.com')
+
+    assert access.auth_pair() == ('jane', 'round')
+    assert get_pwd.call_count == 2
+    get_pwd.assert_has_calls([
+        call(Credentials.KEYRING_SERVICE_DEFAULT, 'jane@keyring.example.com'),
+        call(Credentials.KEYRING_SERVICE_DEFAULT, 'keyring.example.com'),
+    ])

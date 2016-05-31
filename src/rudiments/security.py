@@ -37,6 +37,7 @@ __all__ = ['Credentials']
 class Credentials(object):
     """Look up and provide authN credentials (username / password) from common sources."""
 
+    KEYRING_SERVICE_DEFAULT = 'Login'
     URL_RE = re.compile(r'^(http|https|ftp|ftps)://')  # covers the common use cases
     NETRC_FILE = None  # use the default, unless changed for test purposes
     AUTH_MEMOIZE_INPUT = {}  # remember manual auth input across several queries in one run
@@ -46,6 +47,7 @@ class Credentials(object):
         self.target = target
         self.user = None
         self.password = None
+        self.keyring_service = self.KEYRING_SERVICE_DEFAULT
 
     def auth_valid(self):
         """Return bool indicating whether full credentials were provided."""
@@ -113,8 +115,20 @@ class Credentials(object):
             elif password:
                 self.password = password
 
+    def _get_password_from_keyring(self, accountname):
+        """Query keyring for a password entry."""
+        return keyring.get_password(self.keyring_service, accountname)
+
     def _get_auth_from_keyring(self, hostname):
         """Try to get credentials using `keyring <https://github.com/jaraco/keyring>`_."""
         if not keyring:
             return
-        # TODO: Implement this
+
+        # Try to find specific `user@host` credentials first, then just `host`
+        username = self.user or getpass.getuser()
+        password = self._get_password_from_keyring('{}@{}'.format(username, hostname))
+        if password is None:
+            password = self._get_password_from_keyring(hostname)
+        if password is not None:
+            self.user = username
+            self.password = password
