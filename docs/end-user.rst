@@ -25,6 +25,9 @@ End-User Documentation
 Configuration of Authentication Credentials
 -------------------------------------------
 
+Credentials Lookup Details
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 When using HTTP APIs or other secured web resources, you usually want to
 store your credentials in a *secure but still convenient* fashion.
 Given a *target* that requires authentication in the form of a username and password or API token,
