@@ -69,7 +69,7 @@ calling this command:
 
 .. code-block:: shell
 
-    sudo apt install libdbus-glib-1-dev
+    sudo apt-get install libdbus-glib-1-dev
 
 For the Python packages, use ``pip`` as follows:
 
