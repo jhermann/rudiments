@@ -20,6 +20,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 import getpass
 
+# TODO: use mocker.call from upcoming "pytest-mock" release
 try:
     from unittest.mock import call
 except ImportError:
