@@ -69,7 +69,7 @@ calling this command:
 
 .. code-block:: shell
 
-    sudo apt-get install libdbus-glib-1-dev
+    sudo apt-get install libdbus-glib-1-dev python-dev libffi-dev build-essential
 
 For the Python packages, use ``pip`` as follows:
 
