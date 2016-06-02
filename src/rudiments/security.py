@@ -37,7 +37,6 @@ __all__ = ['Credentials']
 class Credentials(object):
     """Look up and provide authN credentials (username / password) from common sources."""
 
-    KEYRING_SERVICE_DEFAULT = 'Login'
     URL_RE = re.compile(r'^(http|https|ftp|ftps)://')  # covers the common use cases
     NETRC_FILE = None  # use the default, unless changed for test purposes
     AUTH_MEMOIZE_INPUT = {}  # remember manual auth input across several queries in one run
@@ -47,7 +46,8 @@ class Credentials(object):
         self.target = target
         self.user = None
         self.password = None
-        self.keyring_service = self.KEYRING_SERVICE_DEFAULT
+        self.keyring_service = target
+        self.source = None
 
     def auth_valid(self):
         """Return bool indicating whether full credentials were provided."""
@@ -67,27 +67,34 @@ class Credentials(object):
         """Try to get login auth from known sources."""
         if self.URL_RE.match(self.target):
             auth_url = urlparse(self.target)
+            source = 'url'
             if auth_url.username:
                 self.user = auth_url.username
             if auth_url.password:
                 self.password = auth_url.password
             if not self.auth_valid():
-                self._get_auth_from_keyring(auth_url.hostname)
+                source = self._get_auth_from_keyring()
             if not self.auth_valid():
-                self._get_auth_from_netrc(auth_url.hostname)
+                source = self._get_auth_from_netrc(auth_url.hostname)
             if not self.auth_valid():
-                self._get_auth_from_console(auth_url.hostname)
+                source = self._get_auth_from_console(self.target)
         else:
-            self._get_auth_from_console(self.target)
+            source = self._get_auth_from_console(self.target)
+
+        if self.auth_valid():
+            self.source = source
 
     def _get_auth_from_console(self, realm):
         """Prompt for the user and password."""
-        self.user, self.password = self.AUTH_MEMOIZE_INPUT.get(realm, (None, None))
+        self.user, self.password = self.AUTH_MEMOIZE_INPUT.get(realm, (self.user, None))
         if not self.auth_valid():
-            login = getpass.getuser()
-            self.user = self._raw_input('Username for {} [{}]: '.format(realm, login)) or login
-            self.password = getpass.getpass('Password: ')
+            if not self.user:
+                login = getpass.getuser()
+                self.user = self._raw_input('Username for "{}" [{}]: '.format(realm, login)) or login
+            self.password = getpass.getpass('Password for "{}": '.format(realm))
             Credentials.AUTH_MEMOIZE_INPUT[realm] = self.user, self.password
+
+        return 'console'
 
     def _get_auth_from_netrc(self, hostname):
         """Try to find login auth in ``~/.netrc``."""
@@ -96,7 +103,7 @@ class Credentials(object):
         except IOError as cause:
             if cause.errno != errno.ENOENT:
                 raise
-            return
+            return None
         except NetrcParseError as cause:
             raise  # TODO: Map to common base class, so caller has to handle less error types?
 
@@ -115,20 +122,21 @@ class Credentials(object):
             elif password:
                 self.password = password
 
+        return 'netrc'
+
     def _get_password_from_keyring(self, accountname):
         """Query keyring for a password entry."""
         return keyring.get_password(self.keyring_service, accountname)
 
-    def _get_auth_from_keyring(self, hostname):
+    def _get_auth_from_keyring(self):
         """Try to get credentials using `keyring <https://github.com/jaraco/keyring>`_."""
         if not keyring:
-            return
+            return None
 
-        # Try to find specific `user@host` credentials first, then just `host`
-        username = self.user or getpass.getuser()
-        password = self._get_password_from_keyring('{}@{}'.format(username, hostname))
-        if password is None:
-            password = self._get_password_from_keyring(hostname)
+        # Take user from URL if available, else the OS login name
+        password = self._get_password_from_keyring(self.user or getpass.getuser())
         if password is not None:
-            self.user = username
+            self.user = self.user or getpass.getuser()
             self.password = password
+
+        return 'keyring'

@@ -40,14 +40,13 @@ NETRC_TEST_CASES = [
 
 
 def test_credentials_lookup_from_netrc_is_optional(mocker):
-    console_input = mocker.patch(__name__ + '.Credentials._raw_input', return_value='')
     mocker.patch('getpass.getpass', return_value='sesame')
     netrc = mocker.patch('rudiments.security.netrc')
     netrc.side_effect = IOError(2, "not found", "netrc")
 
     access = Credentials('http://jane@no-netrc.example.com')
     auth = access.auth_pair()
-    console_input.assert_called_once()
+    assert access.source == 'console'
 
     with pytest.raises(IOError):
         netrc.side_effect = IOError(13, "cannot open", "netrc")
@@ -64,6 +63,7 @@ def test_credentials_lookup_for_non_url_target(mocker):
 
     console_input.assert_called_once()
     assert auth == (getpass.getuser(), 'sesame')
+    assert access.source == 'console'
 
 
 def test_credentials_lookup_from_console(mocker):
@@ -76,7 +76,7 @@ def test_credentials_lookup_from_console(mocker):
     console_input.assert_called_once()
 
     assert auth == (getpass.getuser(), 'sesame')
-    assert Credentials.AUTH_MEMOIZE_INPUT['console.example.com'] == access.auth_pair()
+    assert Credentials.AUTH_MEMOIZE_INPUT['http://console.example.com'] == access.auth_pair()
 
     # test memoization explicitly
     access = Credentials('http://console.example.com')
@@ -87,12 +87,14 @@ def test_credentials_lookup_from_console(mocker):
     access = Credentials('http://terminal.example.com')
     auth = access.auth_pair()
     assert console_input.call_count == 2
-    assert 'terminal.example.com' in Credentials.AUTH_MEMOIZE_INPUT
+    assert 'http://terminal.example.com' in Credentials.AUTH_MEMOIZE_INPUT
+    assert access.source == 'console'
 
 
 def test_credentials_lookup_from_url():
     access = Credentials('http://jane:bar@url.example.com')
     assert access.auth_pair() == ('jane', 'bar')
+    assert access.source == 'url'
 
 
 @pytest.mark.parametrize('url, name, pwd', NETRC_TEST_CASES)
@@ -106,18 +108,16 @@ def test_credentials_lookup_from_netrc(datadir, url, name, pwd):
         assert name == pair[0], "Wrong username"
         assert pwd == pair[1], "Wrong password"
         assert access.auth_valid(), "Should be True"
+        assert access.source == 'netrc'
     finally:
         Credentials.NETRC_FILE = None
 
 
 def test_credentials_lookup_from_keyring(mocker):
-    get_pwd = mocker.patch('keyring.get_password')
-    get_pwd.side_effect = (None, 'round')
-    access = Credentials('http://jane@keyring.example.com')
+    url = 'http://jane@keyring.example.com'
+    get_pwd = mocker.patch('keyring.get_password', return_value='round')
+    access = Credentials(url)
 
     assert access.auth_pair() == ('jane', 'round')
-    assert get_pwd.call_count == 2
-    get_pwd.assert_has_calls([
-        call(Credentials.KEYRING_SERVICE_DEFAULT, 'jane@keyring.example.com'),
-        call(Credentials.KEYRING_SERVICE_DEFAULT, 'keyring.example.com'),
-    ])
+    get_pwd.assert_called_once_with(url, 'jane')
+    assert access.source == 'keyring'

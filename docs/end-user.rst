@@ -42,14 +42,15 @@ For URLs (``http``, ``https``, ``ftp``, or ``ftps``), the following steps will b
 
 As a general fallback, any given target that is not an URL will ask for a username / password pair.
 
-The keyring and netrc file are actually queried for two entries,
-``user@host`` first and ``host`` second.
+The keyring and netrc file are queried for an entry matching the hostname and account name,
+with the latter being taken from the URL if present, else the user's login name is used.
 This allows you to easily assume different roles on a target system,
 e.g. to access a normal and a privileged account.
-The ``user`` value is either taken from the URL,
-or else your login name is utilized — so for an admin account,
-use something like ``https://admin@service.example.com/``
-and a matching password entry for ``admin@example.com``.
+So for an admin account, use something like ``https://admin@service.example.com/``
+and a matching password entry for ``admin`` on ``service.example.com``.
+
+In netrc files, the ``machine`` entries must be unique, so the name ``user@host`` is queried before the plain host name.
+This way you can provide credentials for several accounts on the same target in one file.
 
 
 Installation Procedures
