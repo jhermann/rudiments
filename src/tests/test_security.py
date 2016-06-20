@@ -54,6 +54,13 @@ def test_credentials_lookup_from_netrc_is_optional(mocker):
         auth = access.auth_pair()
 
 
+@pytest.mark.parametrize('target', (None, ''))
+def test_credentials_lookup_for_empty_target(target):
+    access = Credentials(target)
+    with pytest.raises(ValueError):
+        auth = access.auth_pair()
+
+
 def test_credentials_lookup_for_non_url_target(mocker):
     console_input = mocker.patch(__name__ + '.Credentials._raw_input', return_value='')
     mocker.patch('getpass.getpass', return_value='sesame')

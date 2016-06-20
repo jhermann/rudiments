@@ -65,7 +65,9 @@ class Credentials(object):
 
     def _get_auth(self):
         """Try to get login auth from known sources."""
-        if self.URL_RE.match(self.target):
+        if not self.target:
+            raise ValueError("Unspecified target ({!r})".format(self.target))
+        elif self.URL_RE.match(self.target):
             auth_url = urlparse(self.target)
             source = 'url'
             if auth_url.username:
