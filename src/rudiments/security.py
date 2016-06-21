@@ -53,21 +53,21 @@ class Credentials(object):
         """Return bool indicating whether full credentials were provided."""
         return bool(self.user and self.password)
 
-    def auth_pair(self):
+    def auth_pair(self, force_console=False):
         """Return username/password tuple, possibly prompting the user for them."""
         if not self.auth_valid():
-            self._get_auth()
+            self._get_auth(force_console)
         return (self.user, self.password)
 
     def _raw_input(self, prompt=None):
         """Mockable wrapper for raw_input."""
-        return raw_input(prompt)   # pragma: no cover
+        return raw_input(prompt)  # pragma: no cover
 
-    def _get_auth(self):
+    def _get_auth(self, force_console=False):
         """Try to get login auth from known sources."""
         if not self.target:
             raise ValueError("Unspecified target ({!r})".format(self.target))
-        elif self.URL_RE.match(self.target):
+        elif not force_console and self.URL_RE.match(self.target):
             auth_url = urlparse(self.target)
             source = 'url'
             if auth_url.username:
