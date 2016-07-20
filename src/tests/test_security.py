@@ -1,5 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
+# pylint: disable=invalid-name, unused-wildcard-import, unused-import
 """ Test «some_module».
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>

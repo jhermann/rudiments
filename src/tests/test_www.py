@@ -1,5 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation, invalid-name
+# pylint: disable=unused-wildcard-import
 """ Test ``rudiments.www``.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
