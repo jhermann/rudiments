@@ -1,6 +1,6 @@
-The 0.2.1 release primarily adds Sphinx documentation and the new module
-``humanize`` for I/O of common values in forms understood by humans, e.g.
-byte sizes in IEC notation.
+The 0.3.0 release adds the ``security`` module, which for now encapsulates
+retrieving credentials for accessing secured URLs from various sources
+(keyring, netrc, terminal prompts).
 
 The 'rudiments' package collects ‘miscellaneous’ functionality that is
 unspecific in nature and shared among many projects. It also provides
@@ -10,17 +10,12 @@ project, in the rudiments.reamed package.
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 Links:
 
-  * https://pypi.python.org/pypi/rudiments/0.2.1
+  * https://pypi.python.org/pypi/rudiments/0.3.0
   * https://rudiments.readthedocs.io/en/latest/
   * http://librelist.com/browser/python.rudiments/
 
 Detailed changes:
 
-  * new: Sphinx documentation at https://rudiments.readthedocs.io/
-  * new: 'humanize' module for I/O of common values in forms understood by humans
-  * new: 'pysupport' module with import helpers
-  * new: 'system' module with standard process exit codes
-  * chg: added '/etc/{appname}.d/' to default config paths
-  * bug: need to sort any config.d listing
+  * new: rudiments.security module
 
-See also https://github.com/jhermann/rudiments/releases/tag/v0.2.1
+See also https://github.com/jhermann/rudiments/releases/tag/v0.3.0
