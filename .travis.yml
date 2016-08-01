@@ -18,6 +18,7 @@ python:
 # command to install dependencies
 install:
     - "pip install -r dev-requirements.txt"
+    - "pip install secretstorage dbus-python"
     - "python setup.py develop -U"
 
 # command to run tests
