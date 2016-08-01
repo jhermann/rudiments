@@ -15,7 +15,7 @@ responses==0.5.1
 
 # requirements for `rituals.reamed`
 bunch==1.0.1
-click==3.3
+click==6.6
 configobj>=5
 
 # requirements for `security.Credentials`
