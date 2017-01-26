@@ -53,6 +53,7 @@ Project | Description
 [pyparsing](https://pyparsing.wikispaces.com/) | A library of classes that allows to construct a grammar in pure Python code
 [poyo](https://github.com/hackebrot/poyo) | A pure-Python YAML parser
 [Requests](http://docs.python-requests.org/en/latest/) | Anything HTTP
+[Reusables](https://github.com/cdgriffith/Reusables) | Utilities that programmers may find themselves often recreating
 [sh](http://amoffat.github.io/sh/) | Full-fledged subprocess interface, treat any program as if it were a function
 [sorted_containers](https://github.com/grantjenks/sorted_containers) | Ordered collections (list, dict, set), pure Python and as fast as C
 [Soupy](http://soupy.readthedocs.io/) | Soupy wraps a fluent query interface around BeautifulSoup.
