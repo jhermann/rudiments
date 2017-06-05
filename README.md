@@ -47,7 +47,6 @@ Project | Description
 [boltons](https://boltons.readthedocs.io/en/latest/) | A set of pure-Python utilities augmenting the stdlib
 [Click](http://click.pocoo.org/) | Command line interface framework
 [colorama](https://pypi.python.org/pypi/colorama) | Cross-platform colored terminal text
-[configobj](http://configobj.readthedocs.io/en/latest/) | Config file reading, writing and validation
 [github3.py](http://github3py.readthedocs.io/) | GitHub API v3 client
 [netifaces](https://bitbucket.org/al45tair/netifaces) | Portable network interface information
 [pyparsing](https://pyparsing.wikispaces.com/) | A library of classes that allows to construct a grammar in pure Python code
@@ -58,6 +57,14 @@ Project | Description
 [sorted_containers](https://github.com/grantjenks/sorted_containers) | Ordered collections (list, dict, set), pure Python and as fast as C
 [Soupy](http://soupy.readthedocs.io/) | Soupy wraps a fluent query interface around BeautifulSoup.
 
+Specifically on the subject of configuration handling, these are the ones to consider…
+
+Project | Description
+[configobj](http://configobj.readthedocs.io/en/latest/) | Config file reading, writing and validation
+[dectate](https://github.com/morepath/dectate) | A powerful configuration engine for Python frameworks, based on decorators.
+[dynaconf](https://github.com/rochacbruno/dynaconf) | OSM (Object Settings Mapper) reading from a set of different data stores such as Python settings files, environment variables, Redis, Memcached, INI files, JSON files, YAML files, or your custom extension
+[configman](https://github.com/mozilla/configman) | The grand unified configuration system from Mozilla
+[prettyconf](https://github.com/osantana/prettyconf) | Easy separation of configuration and code, following the recomendations for 12 Factor apps
 
 The following help you with writing your unit and integration tests.
 
