@@ -60,6 +60,7 @@ Project | Description
 Specifically on the subject of configuration handling, these are the ones to consider…
 
 Project | Description
+----: | :----
 [configobj](http://configobj.readthedocs.io/en/latest/) | Config file reading, writing and validation
 [dectate](https://github.com/morepath/dectate) | A powerful configuration engine for Python frameworks, based on decorators.
 [dynaconf](https://github.com/rochacbruno/dynaconf) | OSM (Object Settings Mapper) reading from a set of different data stores such as Python settings files, environment variables, Redis, Memcached, INI files, JSON files, YAML files, or your custom extension
