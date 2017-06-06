@@ -66,6 +66,7 @@ Project | Description
 [dynaconf](https://github.com/rochacbruno/dynaconf) | OSM (Object Settings Mapper) reading from a set of different data stores such as Python settings files, environment variables, Redis, Memcached, INI files, JSON files, YAML files, or your custom extension
 [configman](https://github.com/mozilla/configman) | The grand unified configuration system from Mozilla
 [prettyconf](https://github.com/osantana/prettyconf) | Easy separation of configuration and code, following the recomendations for 12 Factor apps
+[biome](https://github.com/darvid/biome) | Provides painless typed access to namespaced environment variables
 
 The following help you with writing your unit and integration tests.
 
