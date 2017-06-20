@@ -43,7 +43,7 @@ and are (hopefully) best-of-breed.
 
 Project | Description
 ----: | :----
-[Arrow](https://arrow.readthedocs.io/) | Better dates and times for Python – see also [Pendulum](https://github.com/sdispater/pendulum) and [Maya](https://github.com/kennethreitz/maya)
+[Arrow](https://arrow.readthedocs.io/) | Better dates and times for Python – see also [Pendulum](https://github.com/sdispater/pendulum), [Delorean](https://github.com/myusuf3/delorean), and [Maya](https://github.com/kennethreitz/maya)
 [boltons](https://boltons.readthedocs.io/en/latest/) | A set of pure-Python utilities augmenting the stdlib
 [Click](http://click.pocoo.org/) | Command line interface framework
 [colorama](https://pypi.python.org/pypi/colorama) | Cross-platform colored terminal text
