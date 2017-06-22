@@ -4,6 +4,10 @@
 # See http://docs.travis-ci.com/user/build-configuration/
 #
 
+# DBus on precise is way too old…
+dist: trusty
+sudo: required
+
 # build matrix
 language: python
 python:
