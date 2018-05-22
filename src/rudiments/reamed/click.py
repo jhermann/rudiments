@@ -177,12 +177,13 @@ class Configuration(object):
         """Dump the merged configuration to a stream or stdout."""
         self.load().write(to or sys.stdout)
 
-    def section(self, ctx):
+    def section(self, ctx, optional=False):
         """
             Return section of the config for a specific context (sub-command).
 
             Parameters:
                 ctx (Context): The Click context object.
+                optional (bool): If ``True``, return an empty config object when section is missing.
 
             Returns:
                 Section: The configuration section belonging to
@@ -193,6 +194,8 @@ class Configuration(object):
         try:
             return values[ctx.info_name]
         except KeyError:
+            if optional:
+                return configobj.ConfigObj({}, **self.DEFAULT_CONFIG_OPTS)
             raise LoggedFailure("Configuration section '{}' not found!".format(ctx.info_name))
 
     def get(self, name, default=NO_DEFAULT):
