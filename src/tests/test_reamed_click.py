@@ -24,7 +24,7 @@ from contextlib import contextmanager
 
 import pytest
 import configobj
-from bunch import Bunch
+from munch import Munch as Bunch
 
 from rudiments.reamed import click
 from rudiments.reamed.click import *  # pylint: disable=unused-wildcard-import

@@ -14,7 +14,7 @@ responses==0.5.1
 # https://github.com/jhermann/responses/archive/working-context-manager.zip#egg=responses
 
 # requirements for `rituals.reamed`
-bunch==1.0.1
+munch==2.3.2
 click==6.6
 configobj>=5
 

@@ -22,7 +22,7 @@ import re
 import sys
 
 import configobj
-from bunch import Bunch
+from munch import Munch as Bunch
 from click import *  # pylint: disable=wildcard-import
 from click import __all__
 
