@@ -12,6 +12,7 @@
 import os
 import re
 import sys
+from munch import Munch
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -34,6 +35,7 @@ if not on_rtd:
 extensions = [
     'sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.coverage',
     'sphinx.ext.ifconfig', 'sphinx.ext.viewcode', 'sphinx.ext.napoleon',
+    'releases',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -252,3 +254,7 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# https://releases.readthedocs.io/
+releases_release_uri = 'https://pypi.python.org/pypi/{p.name}/%s'.format(p=Munch(meta))
+releases_issue_uri = 'https://github.com/jhermann/{p.name}/issues/%s'.format(p=Munch(meta))

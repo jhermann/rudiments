@@ -18,5 +18,5 @@ tox==2.3.1
 twine==1.7.4
 
 -r test-requirements.txt
--r requirements.txt
+-r docs/requirements.txt
 -e .

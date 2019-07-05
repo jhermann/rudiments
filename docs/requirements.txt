@@ -2,4 +2,6 @@
 # "Read The Docs" requirements
 #
 
+releases==1.6.1
+
 -r ../requirements.txt

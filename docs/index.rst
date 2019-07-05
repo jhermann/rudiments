@@ -83,6 +83,7 @@ Documentation Contents
 
     usage
     end-user
+    changelog
     fullapi
     CONTRIBUTING
     LICENSE
