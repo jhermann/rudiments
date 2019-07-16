@@ -2,7 +2,7 @@
 # pylint: disable=bad-continuation
 """ ‘Double Click’ – Extensions to `Click <http://click.pocoo.org/4/>`_.
 """
-# Copyright ©  2015 Jürgen Hermann <jh@web.de>
+# Copyright ©  2015 - 2019 Jürgen Hermann <jh@web.de>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

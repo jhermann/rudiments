@@ -12,7 +12,7 @@
     these modules can serve as a drop-in replacement, so you
     just have to change the import statement a little.
 """
-# Copyright ©  2015 Jürgen Hermann <jh@web.de>
+# Copyright ©  2015 - 2019 Jürgen Hermann <jh@web.de>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

@@ -4,7 +4,7 @@
 # pylint: disable=too-many-ancestors, redefined-outer-name
 """ Test ``rudiments.reamed.click``.
 """
-# Copyright ©  2015 Jürgen Hermann <jh@web.de>
+# Copyright ©  2015 - 2019 Jürgen Hermann <jh@web.de>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
