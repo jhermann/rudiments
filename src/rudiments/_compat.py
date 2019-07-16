@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name, unused-import, missing-docstring, exec-used
 # pylint: disable=unused-argument, too-few-public-methods, redefined-builtin
-# pylint: disable=no-name-in-module, no-member, undefined-variable, redefined-variable-type
+# pylint: disable=no-name-in-module, no-member, undefined-variable
 # pylint: disable=import-error, wrong-import-position, wrong-import-order, ungrouped-imports
 # flake8: noqa
 """
