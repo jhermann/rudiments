@@ -3,8 +3,8 @@
 #
 
 invoke==1.2.0
-rituals==0.4.1
-##-e git+https://github.com/jhermann/rituals.git#egg=rituals
+## rituals==0.4.1 py3 only
+https://github.com/jhermann/rituals/archive/2bd3528c4d95ec8882ffeeafc38c5c2211c90b5d.zip#egg=rituals
 
 Sphinx==1.8.5
 sphinx-autobuild==0.7.1
