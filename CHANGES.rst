@@ -2,7 +2,10 @@
 Changelog
 =========
 
-* :release:`0.3.0 <PENDING>`
+* :release:`0.3.1 <PENDING>`
+* :feature:`0` new: this changelog
+
+* :release:`0.3.0 <2019-07-16>`
 * :feature:`0` new: this changelog
 * :feature:`0` new: `rudiments.security` module
 * :feature:`0` Credentials: fall back to console prompt for anything not an URL
