@@ -23,7 +23,7 @@ python:
 install:
     - sudo apt-get install build-essential libdbus-glib-1-dev python-dev libffi-dev
     - "pip install -r dev-requirements.txt"
-    - "pip install secretstorage dbus-python"
+    - "pip install secretstorage dbus-python==1.2.4"
     - "python setup.py develop -U"
 # command to run tests
 script: invoke --echo --pty ci
