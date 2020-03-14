@@ -24,7 +24,13 @@ import sys
 import configobj
 from munch import Munch as Bunch
 from click import *  # pylint: disable=wildcard-import
-from click import __all__
+
+try:
+    from click import __all__
+except ImportError:
+    import click
+    __all__ = [x for x in dir(click) if not x.startswith('_')]
+    del click
 
 from .._compat import encode_filename
 

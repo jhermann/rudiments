@@ -26,8 +26,8 @@ import pytest
 import configobj
 from munch import Munch as Bunch
 
-from rudiments.reamed import click
 from rudiments.reamed.click import *  # pylint: disable=unused-wildcard-import
+from rudiments.reamed import click
 
 
 class PrettyPathTests(object):
