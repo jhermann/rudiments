@@ -21,6 +21,7 @@ import os
 import re
 import sys
 import errno
+import base64
 import getpass
 from netrc import netrc, NetrcParseError
 
@@ -61,7 +62,7 @@ class Credentials(object):
 
     def _raw_input(self, prompt=None):
         """Mockable wrapper for raw_input."""
-        return raw_input(prompt)  # pragma: no cover
+        return input(prompt)
 
     def _get_auth(self, force_console=False):
         """Try to get login auth from known sources."""
@@ -120,7 +121,7 @@ class Credentials(object):
                 self.user = username
             if password == 'base64':
                 # support for password obfuscation, prevent "over the shoulder lookup"
-                self.password = account.decode('base64')
+                self.password = base64.b64decode(account).decode('ascii')
             elif password:
                 self.password = password
 
