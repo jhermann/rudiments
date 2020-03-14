@@ -26,7 +26,7 @@ import getpass
 from netrc import netrc, NetrcParseError
 
 try:
-    import keyring
+    import keyring_DISABLED_FOR_NOW  # TODO
 except ImportError:
     keyring = None
 

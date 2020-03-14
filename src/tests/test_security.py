@@ -122,10 +122,13 @@ def test_credentials_lookup_from_netrc(datadir, url, name, pwd):
 
 
 def test_credentials_lookup_from_keyring(mocker):
-    url = 'http://jane@keyring.example.com'
-    get_pwd = mocker.patch('keyring.get_password', return_value='round')
-    access = Credentials(url)
+    from rudiments import security
 
-    assert access.auth_pair() == ('jane', 'round')
-    get_pwd.assert_called_once_with(url, 'jane')
-    assert access.source == 'keyring'
+    if security.keyring:
+        url = 'http://jane@keyring.example.com'
+        get_pwd = mocker.patch('keyring.get_password', return_value='round')
+        access = Credentials(url)
+
+        assert access.auth_pair() == ('jane', 'round')
+        get_pwd.assert_called_once_with(url, 'jane')
+        assert access.source == 'keyring'
