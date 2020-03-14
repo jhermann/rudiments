@@ -2,23 +2,23 @@
 # Test requirements
 #
 
-pytest==4.6.4
-pytest-spec==1.1.0
-pytest-cov==2.7.1
+pytest==5.4.1
+pytest-spec==2.0.0
+pytest-cov==2.8.1
 pytest-mock
 mock==2.0.0 ; python_version == '2.7'
 py>=1.4.29
-coveralls==1.8.1
+coveralls==1.11.1
 sh==1.12.14
-responses==0.10.6
+responses==0.10.12
 # https://github.com/jhermann/responses/archive/working-context-manager.zip#egg=responses
 
 # requirements for `rituals.reamed`
-munch==2.3.2
-click==6.6
+munch==2.5.0
+click==7.1.1
 configobj>=5
 
 # requirements for `security.Credentials`
-keyring==18.0.1
+keyring==21.1.1
 ##secretstorage ; sys_platform == 'linux2'
 ##dbus-python ; sys_platform == 'linux2'
