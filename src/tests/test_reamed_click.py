@@ -36,7 +36,7 @@ class PrettyPathTests(object):
         path = os.path.expanduser('~/foobar')
         assert os.path.isabs(path[0]), "Test path is absolute"
         path = pretty_path(path)
-        assert path[:2] == '~' + os.sep, "Path was changed to short form"
+        assert path[:2] == '~' + os.sep, "Path {!r} was changed to short form ~{}…".format(path, os.sep)
         assert path.split(os.sep) == ['~', 'foobar'], "Path is semantically the same"
 
 
