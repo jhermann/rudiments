@@ -4,8 +4,7 @@
 # See http://docs.travis-ci.com/user/build-configuration/
 #
 
-# DBus on precise is way too old…
-dist: trusty
+dist: bionic
 sudo: required
 
 # build matrix
@@ -23,8 +22,7 @@ python:
 install:
     - sudo apt-get install build-essential libdbus-glib-1-dev python3-dev libffi-dev
     - "pip install -r dev-requirements.txt"
-    - "pip install secretstorage dbus-python==1.2.4"
-    - "python setup.py develop -U"
+    - "pip install secretstorage dbus-python==1.2.16"
 # command to run tests
 script: invoke --echo --pty ci
 
