@@ -7,7 +7,7 @@
     This package offers configuration handling and other basic helpers
     for Python projects.
 
-    Copyright ©  2015 - 2019 Jürgen Hermann <jh@web.de>
+    Copyright ©  2015 - 2020 Jürgen Hermann <jh@web.de>
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
