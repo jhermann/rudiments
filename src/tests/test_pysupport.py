@@ -1,6 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-# pylint: disable=unidiomatic-typecheck
+# pylint: disable=unidiomatic-typecheck, import-outside-toplevel
 """ Test «some_module».
 """
 # Copyright ©  2015 - 2019 Jürgen Hermann <jh@web.de>
@@ -25,7 +25,7 @@ import pytest
 from rudiments import pysupport
 
 
-class ImportTests(object):
+class ImportTests():
 
     def test_import_name(self):
         impname = pysupport.import_name("rudiments.pysupport", "import_name")

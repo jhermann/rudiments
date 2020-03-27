@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-whitespace, attribute-defined-outside-init, invalid-name
-# pylint: disable=wrong-import-position, misplaced-comparison-constant
+# pylint: disable=wrong-import-position, misplaced-comparison-constant, import-outside-toplevel
 """
     Rudiments – Fundamental elements for any Python project, like configuration handling.
 

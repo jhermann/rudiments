@@ -23,7 +23,7 @@ import sys
 
 import configobj
 from munch import Munch as Bunch
-from click import *  # pylint: disable=wildcard-import
+from click import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 try:
     from click import __all__
@@ -81,7 +81,7 @@ class AliasedGroup(Group):
         return super(AliasedGroup, self).get_command(ctx, cmd_name)
 
 
-class Configuration(object):
+class Configuration():
     """ Configuration container that is initialized early in the main command.
 
         The default instance is available via the Click context as ``ctx.obj.cfg``.
@@ -131,10 +131,11 @@ class Configuration(object):
             ] + [i for i in env_config.split(os.pathsep) if i]
 
         for path in config_paths or []:
-            for name in path.split(os.pathsep):
-                if name:
-                    self.config_paths.append(name)
+            for path_entry in path.split(os.pathsep):
+                if path_entry:
+                    self.config_paths.append(path_entry)
                 else:
+                    # an empty entry represents the default path
                     self.config_paths.extend(defaults)
 
         if not self.config_paths:

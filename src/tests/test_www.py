@@ -27,7 +27,7 @@ import responses
 from rudiments.www import *
 
 
-class URLAsFileTests(object):
+class URLAsFileTests():
 
     URL = 'http://example.com/index.html'
     BODY = 'Hi there!'

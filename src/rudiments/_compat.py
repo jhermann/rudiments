@@ -84,7 +84,7 @@ if not PY2:
     get_next = lambda x: x.__next__
 
 else:
-    unichr = unichr
+    #unichr = unichr
     text_type = unicode
     range_type = xrange
     string_types = (str, unicode)
@@ -95,13 +95,14 @@ else:
     iteritems = lambda d: d.iteritems()
 
     import cPickle as pickle
-    from cStringIO import StringIO as BytesIO, StringIO
+    from cStringIO import StringIO
+    BytesIO = StringIO
     NativeStringIO = BytesIO
 
     exec('def reraise(tp, value, tb=None):\n raise tp, value, tb')
 
     from itertools import imap, izip, ifilter
-    intern = intern
+    #intern = intern
 
     def implements_iterator(cls):
         cls.next = cls.__next__

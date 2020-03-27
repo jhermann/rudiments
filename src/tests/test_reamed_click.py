@@ -30,7 +30,7 @@ from rudiments.reamed.click import *  # pylint: disable=unused-wildcard-import
 from rudiments.reamed import click
 
 
-class PrettyPathTests(object):
+class PrettyPathTests():
 
     def test_pretty_path_replaces_home_folder(self):
         path = os.path.expanduser('~/foobar')
@@ -40,7 +40,7 @@ class PrettyPathTests(object):
         assert path.split(os.sep) == ['~', 'foobar'], "Path is semantically the same"
 
 
-class SerrorTests(object):
+class SerrorTests():
     RECORDER = []
 
     @contextmanager
@@ -64,7 +64,7 @@ class SerrorTests(object):
             assert self.RECORDER[-1] == '1 2'
 
 
-class LoggedFailureTests(object):
+class LoggedFailureTests():
 
     def test_logged_failure_is_usage_error(self):
         exc = LoggedFailure("foo")
@@ -89,7 +89,7 @@ class AliasedGroupWithMock(AliasedGroup, GroupMock):
 aliased_group = pytest.fixture()(lambda: AliasedGroupWithMock())
 
 
-class AliasedGroupTests(object):
+class AliasedGroupTests():
 
     def test_alias_group_maps_to_canonical_name(self, aliased_group):
         aliased_group.get_command(None, 'foo')
@@ -100,7 +100,7 @@ class AliasedGroupTests(object):
         assert aliased_group == [(None, 'foobar')]
 
 
-class ConfigurationTests(object):
+class ConfigurationTests():
 
     def test_configuration_from_context_creation_works(self):
         ctx = Bunch(info_name='foobarbaz', obj=None)

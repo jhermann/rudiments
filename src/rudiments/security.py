@@ -17,9 +17,7 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-import os
 import re
-import sys
 import errno
 import base64
 import getpass
@@ -35,7 +33,7 @@ from ._compat import urlparse
 __all__ = ['Credentials']
 
 
-class Credentials(object):
+class Credentials():
     """Look up and provide authN credentials (username / password) from common sources."""
 
     URL_RE = re.compile(r'^(http|https|ftp|ftps)://')  # covers the common use cases

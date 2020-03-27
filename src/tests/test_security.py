@@ -1,6 +1,6 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-# pylint: disable=invalid-name, unused-wildcard-import, unused-import
+# pylint: disable=invalid-name, unused-wildcard-import, unused-import, import-outside-toplevel
 """ Test «some_module».
 """
 # Copyright ©  2015 - 2019 Jürgen Hermann <jh@web.de>
@@ -42,15 +42,15 @@ NETRC_TEST_CASES = [
 
 def test_credentials_lookup_from_netrc_is_optional(mocker):
     mocker.patch('getpass.getpass', return_value='sesame')
-    netrc = mocker.patch('rudiments.security.netrc')
-    netrc.side_effect = IOError(2, "not found", "netrc")
+    netrc_call = mocker.patch('rudiments.security.netrc')
+    netrc_call.side_effect = IOError(2, "not found", "netrc")
 
     access = Credentials('http://jane@no-netrc.example.com')
     auth = access.auth_pair()
     assert access.source == 'console'
 
     with pytest.raises(IOError):
-        netrc.side_effect = IOError(13, "cannot open", "netrc")
+        netrc_call.side_effect = IOError(13, "cannot open", "netrc")
         access = Credentials('http://jane@no-netrc.example.com')
         auth = access.auth_pair()
 
