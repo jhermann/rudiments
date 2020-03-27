@@ -21,7 +21,7 @@ python:
 
 # command to install dependencies
 install:
-    - sudo apt-get install build-essential libdbus-glib-1-dev python-dev libffi-dev
+    - sudo apt-get install build-essential libdbus-glib-1-dev python3-dev libffi-dev
     - "pip install -r dev-requirements.txt"
     - "pip install secretstorage dbus-python==1.2.4"
     - "python setup.py develop -U"
