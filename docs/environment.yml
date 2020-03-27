@@ -1,0 +1,4 @@
+name: rudiments
+dependencies:
+- python=3.6
+
