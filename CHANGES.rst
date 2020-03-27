@@ -2,8 +2,11 @@
 Changelog
 =========
 
-* :release:`0.3.1 <PENDING>`
-* :feature:`0` new: this changelog
+* :release:`0.4.0 <2020-03-27>`
+* :support:`0` Supported Python versions were limited to 3.5 … 3.8
+* :support:`0` Keyring support is disabled for now (was never very stable anyway)
+* :feature:`0` Newer Click versions are now supported
+* :feature:`0` Windows path handling fixed
 
 * :release:`0.3.0 <2019-07-16>`
 * :feature:`0` new: this changelog
