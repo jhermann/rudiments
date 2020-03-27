@@ -19,6 +19,6 @@ click==7.1.1
 configobj>=5
 
 # requirements for `security.Credentials`
-keyring==21.1.1
+keyring==21.2.0
 ##secretstorage ; sys_platform == 'linux2'
 ##dbus-python ; sys_platform == 'linux2'
