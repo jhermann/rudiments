@@ -42,10 +42,11 @@ __all__ = list(__all__) + [
 __all__ = [encode_filename(_) for _ in __all__]
 
 
-def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
+def pretty_path(path, _home_path=os.path.expanduser('~') + os.sep):
     """Prettify path for humans, and make it Unicode."""
     path = format_filename(path)
-    path = _home_re.sub('~' + os.sep, path)
+    if path.startswith(_home_path):
+        path = '~/' + path[len(_home_path):]
     return path
 
 
